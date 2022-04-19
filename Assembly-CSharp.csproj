@@ -36,16 +36,17 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Gameplay\Scripts\UI\UICanvas.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\UI\UIManager.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasBlockRaycast.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasGameplay.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMessage.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMainMenu.cs" />
      <Compile Include="Assets\Gameplay\Scripts\Camera\CameraFollow.cs" />
      <Compile Include="Assets\Gameplay\Scripts\Player\PlayerAnimator.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Gameplay\Scripts\Camera\CameraScroll.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\UI\UIManager.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\UI\UICanvas.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMessage.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasGameplay.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasBlockRaycast.cs" />
-     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMainMenu.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\Player\PlayerController.cs" />
+     <Compile Include="Assets\Gameplay\Scripts\Player\PlayerManager.cs" />
      <None Include="Assets\Gameplay\Model\Fantasy Chess RPG Character - Arthur\readme.txt" />
      <None Include="Assets\Extension\FantasyEnvironments\Environments\README.txt" />
     <Reference Include="UnityEngine">
