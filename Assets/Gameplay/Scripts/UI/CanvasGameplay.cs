@@ -2,17 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CanvasGameplay : UICanvas
 {   
+    private static CanvasGameplay m_Instance;
+
+    public static CanvasGameplay Instance
+    {
+        get
+        {
+            return m_Instance;
+        }
+    }
+    private void Awake()
+    {
+        if (m_Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            m_Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        health = PlayerManager.Instance.health;
+    }
     //Variable of player stat
     private int health;
 
     //UI player health
     public Transform playerHealthSlider;
+    public Transform chosenCharUI;
     public Slider playerHealthSlider3D;
     public Slider playerHealthSlider2D;
-
+    public TextMeshProUGUI chosenCharText;
 
     //UI for ability
     [Header("Ability1")]
@@ -39,10 +63,6 @@ public class CanvasGameplay : UICanvas
     bool isCooldown4 = false;
     public KeyCode ability4;
 
-    private void Awake() {
-        health = PlayerManager.Instance.health;
-    }
-
     void Start() {
         abilityImage1.fillAmount = 0;
         abilityImage2.fillAmount = 0;
@@ -68,6 +88,8 @@ public class CanvasGameplay : UICanvas
     void LateUpdate() {
         playerHealthSlider.LookAt(Camera.main.transform);
         playerHealthSlider.Rotate(0,180,0);
+        chosenCharUI.LookAt(Camera.main.transform);
+        chosenCharUI.Rotate(0,180,0);
     }
 
     void Ability1Display(){
