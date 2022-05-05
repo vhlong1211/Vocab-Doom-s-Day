@@ -5,10 +5,14 @@ using UnityEngine.AI;
 // using System.Diagnostics;
 
 public class PlayerController : MonoBehaviour
-{
+{   
+
     NavMeshAgent agent;
-    public float rotateSpeedMovement = 0.1f;
-    float rotateVelocity;
+
+    private float rotateVelocity ;
+    private float speed = 7;
+    private bool isTurning = false;
+    private Vector3 clickPosBuffer;
     
     private 
     // Start is called before the first frame update
@@ -27,15 +31,22 @@ public class PlayerController : MonoBehaviour
                 //Move to the raycast point
                 agent.SetDestination(hit.point);
                 //Rotation
-                Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
-                float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-                rotationToLookAt.eulerAngles.y,
-                ref rotateVelocity,
-                rotateSpeedMovement * (Time.deltaTime * 5));
-                transform.eulerAngles = new Vector3(0,rotationY,0);
+                //Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
+                // float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
+                // rotationToLookAt.eulerAngles.y,
+                // ref rotateVelocity,
+                // rotateSpeedMovement * (Time.deltaTime * 5));
+                // transform.eulerAngles = new Vector3(0,rotationY,0);
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation,rotationToLookAt,rotateVelocity*Time.deltaTime);
             }
         } 
-        
+        if(Input.GetMouseButtonDown(0)){
+            RaycastHit hit;
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity);
+            clickPosBuffer = hit.point;
+            NormalAttack();
+        } 
+        DoRotation();
         HandleKeyboardInput();
     }
 
@@ -121,6 +132,15 @@ public class PlayerController : MonoBehaviour
         }else if(Input.GetKeyDown(KeyCode.Z)){
             Debug.Log("z");
             ChangeWord('Z');
+        }else if(Input.GetKeyDown(KeyCode.Alpha1)){
+            Debug.Log("1");
+            PlayerAnimator.Instance.CastSkill1();
+        }else if(Input.GetKeyDown(KeyCode.Alpha2)){
+            Debug.Log("2");
+            PlayerAnimator.Instance.CastSkill2();
+        }else if(Input.GetKeyDown(KeyCode.Alpha3)){
+            Debug.Log("3");
+            PlayerAnimator.Instance.CastSkill3();
         }else{
             return;
         }
@@ -134,4 +154,27 @@ public class PlayerController : MonoBehaviour
         PlayerManager.Instance.chosenWord = word;
     }
 
+    private void NormalAttack(){
+        agent.speed = 0;
+        agent.SetDestination(transform.position);
+        isTurning = true;
+        PlayerAnimator.Instance.Attack();
+    }
+
+    private void DoRotation(){
+        if(!isTurning)  return;
+        clickPosBuffer = new Vector3(clickPosBuffer.x,transform.position.y,clickPosBuffer.z);
+        Quaternion rotationToLookAt = Quaternion.LookRotation(clickPosBuffer - transform.position);
+        float angleDiff = Quaternion.Angle(transform.rotation,rotationToLookAt);
+        //Debug.Log("root:" +transform.eulerAngles + "---" + rotationToLookAt.eulerAngles);
+        Debug.Log(angleDiff);
+        float turnTime = 0.19f;
+        rotateVelocity = angleDiff / turnTime * 2;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation,rotationToLookAt,rotateVelocity*Time.deltaTime);
+    }
+
+    public void FinishCasting(){
+        agent.speed = speed;
+        isTurning = false;
+    }
 }
