@@ -96,9 +96,20 @@ public class UIManager : MonoBehaviour
 
     public void CloseUI(UIName name)
     {
+        UICanvas canvas = null;
         //check neu khong co trong list thi thoi
         //neu co trong list
         //2.OnClose
+        if (!canvasManagers.ContainsKey(name) || canvasManagers[name] == null)
+        {
+            canvas = Instantiate(canvasPrefabs[name], parent);
+            canvasManagers.Add(name, canvas);
+        }
+        else
+        {
+            canvas = canvasManagers[name];
+        }
+        canvas.OnClose();
     }
 
     public bool IsOpened(UIName name)

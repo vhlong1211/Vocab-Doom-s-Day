@@ -7,40 +7,35 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {   
 
-    NavMeshAgent agent;
+    public Transform gunPosition;
+    public NavMeshAgent agent;
+    public Transform bulletPrefab;
 
     private float rotateVelocity ;
     private float speed = 7;
-    private bool isTurning = false;
+    private bool isCasting = false;
     private Vector3 clickPosBuffer;
     
-    private 
+     
     // Start is called before the first frame update
     void Start()
     {
-        agent = gameObject.GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetMouseButtonDown(1)){
+            if(isCasting)   return;
             RaycastHit hit;
             //Check if raycast hit sthing
             if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity)){
                 //Move to the raycast point
                 agent.SetDestination(hit.point);
-                //Rotation
-                //Quaternion rotationToLookAt = Quaternion.LookRotation(hit.point - transform.position);
-                // float rotationY = Mathf.SmoothDampAngle(transform.eulerAngles.y,
-                // rotationToLookAt.eulerAngles.y,
-                // ref rotateVelocity,
-                // rotateSpeedMovement * (Time.deltaTime * 5));
-                // transform.eulerAngles = new Vector3(0,rotationY,0);
-                //transform.rotation = Quaternion.RotateTowards(transform.rotation,rotationToLookAt,rotateVelocity*Time.deltaTime);
             }
         } 
         if(Input.GetMouseButtonDown(0)){
+            if(isCasting)   return;
             RaycastHit hit;
             Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity);
             clickPosBuffer = hit.point;
@@ -51,6 +46,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void HandleKeyboardInput(){
+        if(isCasting)   return;
         if (Input.anyKeyDown && !Input.GetMouseButtonDown(1)){
         // Stopwatch stopwatch = new Stopwatch();
         // stopwatch.Start();
@@ -141,6 +137,9 @@ public class PlayerController : MonoBehaviour
         }else if(Input.GetKeyDown(KeyCode.Alpha3)){
             Debug.Log("3");
             PlayerAnimator.Instance.CastSkill3();
+        }else if(Input.GetKeyDown(KeyCode.Space)){
+            //Debug.Log("Space");
+            Blink();
         }else{
             return;
         }
@@ -157,24 +156,55 @@ public class PlayerController : MonoBehaviour
     private void NormalAttack(){
         agent.speed = 0;
         agent.SetDestination(transform.position);
-        isTurning = true;
+        isCasting = true;
         PlayerAnimator.Instance.Attack();
     }
 
     private void DoRotation(){
-        if(!isTurning)  return;
+        if(!isCasting)  return;
         clickPosBuffer = new Vector3(clickPosBuffer.x,transform.position.y,clickPosBuffer.z);
         Quaternion rotationToLookAt = Quaternion.LookRotation(clickPosBuffer - transform.position);
         float angleDiff = Quaternion.Angle(transform.rotation,rotationToLookAt);
         //Debug.Log("root:" +transform.eulerAngles + "---" + rotationToLookAt.eulerAngles);
-        Debug.Log(angleDiff);
-        float turnTime = 0.19f;
+        //Debug.Log(angleDiff);
+        float turnTime = 0.19f / 2f;
         rotateVelocity = angleDiff / turnTime * 2;
         transform.rotation = Quaternion.RotateTowards(transform.rotation,rotationToLookAt,rotateVelocity*Time.deltaTime);
     }
 
+    public void Shoot(){
+        Transform bullet = Instantiate(bulletPrefab);
+        bullet.position = gunPosition.position;
+        bullet.rotation = gunPosition.rotation;
+    }
+
     public void FinishCasting(){
         agent.speed = speed;
-        isTurning = false;
+        isCasting = false;
+    }
+
+    public void Blink(){
+        if(isCasting)   return;
+        float blinkDistance = 5f;
+        agent.enabled = false;
+        for(int i = 0 ; i < 10 ; i++){
+            Vector3 destination = transform.position + transform.forward * (blinkDistance - blinkDistance * i/10);
+            NavMeshHit hit;
+            bool isBaked = NavMesh.SamplePosition(destination,out hit ,0f,NavMesh.AllAreas);
+            if(isBaked){
+                transform.position = destination;
+                agent.enabled = true;
+                NavMeshHit hitParam;
+                if(NavMesh.SamplePosition(destination + transform.forward,out hitParam ,0f,NavMesh.AllAreas)){
+                    Debug.Log("case 1:"+ (destination + transform.forward));
+                    agent.SetDestination(destination + transform.forward);
+                }else{
+                    Debug.Log("case 2:"+destination);
+                    agent.SetDestination(destination);
+                }
+                return;
+            }
+        }
+        agent.enabled = true; 
     }
 }

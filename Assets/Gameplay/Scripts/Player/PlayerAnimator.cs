@@ -27,10 +27,10 @@ public class PlayerAnimator : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
     public NavMeshAgent agent;
     public Animator anim;
-    public UnityEvent use;
+    public UnityEvent stopCastingEvent;
+    public UnityEvent shootEvent;
 
     float motionSmoothTime = 0.1f;
 
@@ -60,7 +60,11 @@ public class PlayerAnimator : MonoBehaviour
     }
 
     public void FinishCasting(){
-        use.Invoke();
+        stopCastingEvent.Invoke();
+    }
+
+    public void Shoot(){
+        shootEvent.Invoke();
     }
 
 }

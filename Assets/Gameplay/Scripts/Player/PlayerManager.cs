@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager m_Instance;
-
     public static PlayerManager Instance
     {
         get
@@ -26,6 +25,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public Transform player;
     public int health = 20;
     public char chosenWord;
 }
