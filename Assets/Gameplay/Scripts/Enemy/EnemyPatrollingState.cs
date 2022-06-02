@@ -18,8 +18,9 @@ public class EnemyPatrollingState : EnemyBaseState
         CheckPlayerAround(enemy);
     }
 
-    public override void OnCollisionEnter(EnemyStateManager enemy){
-        
+    public override void OnTriggerEnter(EnemyStateManager enemy,Collider hit){
+        base.OnTriggerEnter(enemy,hit);
+        enemy.SwitchState(enemy.ChasingState);
     }
 
     private void SearchWalkPoint(EnemyStateManager enemy){
@@ -31,7 +32,6 @@ public class EnemyPatrollingState : EnemyBaseState
         float randomX = Random.Range(-walkPointRange, walkPointRange);
         Vector3 walkPoint = new Vector3(enemy.transform.position.x + randomX, enemy.transform.position.y, enemy.transform.position.z + randomZ);
         enemy.agent.SetDestination(walkPoint);
-
     }
 
     private void CheckPlayerAround(EnemyStateManager enemy){

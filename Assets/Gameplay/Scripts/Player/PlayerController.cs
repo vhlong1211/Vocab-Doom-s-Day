@@ -51,91 +51,91 @@ public class PlayerController : MonoBehaviour
         // Stopwatch stopwatch = new Stopwatch();
         // stopwatch.Start();
         if(Input.GetKeyDown(KeyCode.A)){
-            Debug.Log("a");
-            ChangeWord('A');
+            //Debug.Log("a");
+            ChangeWord('a');
         }else if(Input.GetKeyDown(KeyCode.B)){
-            Debug.Log("b");
-            ChangeWord('B');
+            //Debug.Log("b");
+            ChangeWord('b');
         }else if(Input.GetKeyDown(KeyCode.C)){
-            Debug.Log("c");
-            ChangeWord('C');               
+            //Debug.Log("c");
+            ChangeWord('c');               
         }else if(Input.GetKeyDown(KeyCode.D)){
-            Debug.Log("d");
-            ChangeWord('D');
+            //Debug.Log("d");
+            ChangeWord('d');
         }else if(Input.GetKeyDown(KeyCode.E)){
-            Debug.Log("e");
-            ChangeWord('E');
+            //Debug.Log("e");
+            ChangeWord('e');
         }else if(Input.GetKeyDown(KeyCode.F)){
-            Debug.Log("f");
-            ChangeWord('F');
+            //Debug.Log("f");
+            ChangeWord('f');
         }else if(Input.GetKeyDown(KeyCode.G)){
-            Debug.Log("g");
-            ChangeWord('G');
+            //Debug.Log("g");
+            ChangeWord('g');
         }else if(Input.GetKeyDown(KeyCode.H)){
-            Debug.Log("h");
-            ChangeWord('H');
+            //Debug.Log("h");
+            ChangeWord('h');
         }else if(Input.GetKeyDown(KeyCode.I)){
-            Debug.Log("i");
-            ChangeWord('I');
+            //Debug.Log("i");
+            ChangeWord('i');
         }else if(Input.GetKeyDown(KeyCode.J)){
-            Debug.Log("j");
-            ChangeWord('J');
+            //Debug.Log("j");
+            ChangeWord('j');
         }else if(Input.GetKeyDown(KeyCode.K)){
-            Debug.Log("k");
-            ChangeWord('K');
+            //Debug.Log("k");
+            ChangeWord('k');
         }else if(Input.GetKeyDown(KeyCode.L)){
-            Debug.Log("l");
-            ChangeWord('L');
+            //Debug.Log("l");
+            ChangeWord('l');
         }else if(Input.GetKeyDown(KeyCode.M)){
-            Debug.Log("m");
-            ChangeWord('M');
+            //Debug.Log("m");
+            ChangeWord('m');
         }else if(Input.GetKeyDown(KeyCode.N)){
-            Debug.Log("n");
-            ChangeWord('N');
+            //Debug.Log("n");
+            ChangeWord('n');
         }else if(Input.GetKeyDown(KeyCode.O)){
-            Debug.Log("o");
-            ChangeWord('O');
+            //Debug.Log("o");
+            ChangeWord('o');
         }else if(Input.GetKeyDown(KeyCode.P)){
-            Debug.Log("p");
-            ChangeWord('P');
+            //Debug.Log("p");
+            ChangeWord('p');
         }else if(Input.GetKeyDown(KeyCode.Q)){
-            Debug.Log("q");
-            ChangeWord('Q');
+            //Debug.Log("q");
+            ChangeWord('q');
         }else if(Input.GetKeyDown(KeyCode.R)){
-            Debug.Log("r");
-            ChangeWord('R');
+            //Debug.Log("r");
+            ChangeWord('r');
         }else if(Input.GetKeyDown(KeyCode.S)){
-            Debug.Log("s");
-            ChangeWord('S');
+            //Debug.Log("s");
+            ChangeWord('s');
         }else if(Input.GetKeyDown(KeyCode.T)){
-            Debug.Log("t");
-            ChangeWord('T');
+            //Debug.Log("t");
+            ChangeWord('t');
         }else if(Input.GetKeyDown(KeyCode.U)){
-            Debug.Log("u");
-            ChangeWord('U');
+            //Debug.Log("u");
+            ChangeWord('u');
         }else if(Input.GetKeyDown(KeyCode.V)){
-            Debug.Log("v");
-            ChangeWord('V');
+            //Debug.Log("v");
+            ChangeWord('v');
         }else if(Input.GetKeyDown(KeyCode.W)){
-            Debug.Log("w");
-            ChangeWord('W');
+            //Debug.Log("w");
+            ChangeWord('w');
         }else if(Input.GetKeyDown(KeyCode.X)){
-            Debug.Log("x");
-            ChangeWord('X');
+            //Debug.Log("x");
+            ChangeWord('x');
         }else if(Input.GetKeyDown(KeyCode.Y)){
-            Debug.Log("y");
-            ChangeWord('Y');
+            //Debug.Log("y");
+            ChangeWord('y');
         }else if(Input.GetKeyDown(KeyCode.Z)){
-            Debug.Log("z");
-            ChangeWord('Z');
+            //Debug.Log("z");
+            ChangeWord('z');
         }else if(Input.GetKeyDown(KeyCode.Alpha1)){
-            Debug.Log("1");
+            //Debug.Log("1");
             PlayerAnimator.Instance.CastSkill1();
         }else if(Input.GetKeyDown(KeyCode.Alpha2)){
-            Debug.Log("2");
+            //Debug.Log("2");
             PlayerAnimator.Instance.CastSkill2();
         }else if(Input.GetKeyDown(KeyCode.Alpha3)){
-            Debug.Log("3");
+            //Debug.Log("3");
             PlayerAnimator.Instance.CastSkill3();
         }else if(Input.GetKeyDown(KeyCode.Space)){
             //Debug.Log("Space");
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     private void ChangeWord(char word){
         CanvasGameplay.Instance.chosenCharText.SetText(word.ToString());
-        PlayerManager.Instance.chosenWord = word;
+        PlayerManager.Instance.chosenChar = word;
     }
 
     private void NormalAttack(){
@@ -174,6 +174,7 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot(){
         Transform bullet = Instantiate(bulletPrefab);
+        bullet.GetComponent<Projectile>().chosenChar = PlayerManager.Instance.chosenChar;
         bullet.position = gunPosition.position;
         bullet.rotation = gunPosition.rotation;
     }

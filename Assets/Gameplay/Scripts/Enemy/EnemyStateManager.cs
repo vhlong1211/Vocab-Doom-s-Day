@@ -16,7 +16,7 @@ public class EnemyStateManager : MonoBehaviour
     [HideInInspector]
     public Transform player;
     [HideInInspector]
-    public List<char> weakCharHolder = new List<char>();
+    public Dictionary<char,int> weakCharHolder = new Dictionary<char,int>();
     public Animator anim;
     
 
@@ -43,9 +43,18 @@ public class EnemyStateManager : MonoBehaviour
         anim.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        currentState.OnTriggerEnter(this, other);
+    }
+
     public void SwitchState(EnemyBaseState state){
         currentState = state;
         currentState.EnterState(this);
+    }
+
+    public void Die() {
+        GameObject.Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected() {
@@ -67,7 +76,7 @@ public class EnemyStateManager : MonoBehaviour
         {
             int weakIndex1 = Random.Range(0, charCount);
             weakIndexList.Add(weakIndex1);
-            weakCharHolder.Add(pair.Key[weakIndex1]);
+            weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
         }
         else if (charCount <= 10)
         {
@@ -78,8 +87,8 @@ public class EnemyStateManager : MonoBehaviour
             }
             weakIndexList.Add(weakIndex1);
             weakIndexList.Add(weakIndex2);
-            weakCharHolder.Add(pair.Key[weakIndex1]);
-            weakCharHolder.Add(pair.Key[weakIndex2]);
+            weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
+            weakCharHolder.Add(pair.Key[weakIndex2],weakIndex2);
         }
         else {
             int weakIndex1 = Random.Range(0, charCount);
@@ -95,9 +104,9 @@ public class EnemyStateManager : MonoBehaviour
             weakIndexList.Add(weakIndex1);
             weakIndexList.Add(weakIndex2);
             weakIndexList.Add(weakIndex3);
-            weakCharHolder.Add(pair.Key[weakIndex1]);
-            weakCharHolder.Add(pair.Key[weakIndex2]);
-            weakCharHolder.Add(pair.Key[weakIndex3]);
+            weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
+            weakCharHolder.Add(pair.Key[weakIndex2],weakIndex2);
+            weakCharHolder.Add(pair.Key[weakIndex3],weakIndex3);
         }
         enemyCharUI.Init(pair,weakIndexList);
     }

@@ -17,7 +17,7 @@ public class EnemyChasingState : EnemyBaseState
         enemy.agent.SetDestination(enemy.player.position);
     }
 
-    public override void OnCollisionEnter(EnemyStateManager enemy){
+    //public override void OnCollisionEnter(EnemyStateManager enemy){
         
-    }
+    //}
 }

@@ -12,7 +12,7 @@ public class EnemyCharUI : MonoBehaviour
     private float panelDistance = 380f;
     private float leftMargin;
     private int charCount;
-    private Dictionary<int, TextMeshProUGUI> hiddenCharList = new Dictionary<int, TextMeshProUGUI>();
+    public Dictionary<int, TextMeshProUGUI> hiddenCharList = new Dictionary<int, TextMeshProUGUI>();
 
     // Start is called before the first frame update
     void Start()

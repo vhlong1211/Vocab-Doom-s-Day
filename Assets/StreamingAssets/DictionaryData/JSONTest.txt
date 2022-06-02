@@ -1,8 +1,8 @@
-Apartment=Căn hộ
-Ago=Trước kia
-Agree=Đồng ý
-Above=Bên trên
-August=Tháng tám
-Aunt=Dì,cô,thím
-Apple=Quả táo
-Air=Không khí
+apartment=Căn hộ
+ago=Trước kia
+agree=Đồng ý
+above=Bên trên
+august=Tháng tám
+aunt=Dì,cô,thím
+apple=Quả táo
+air=Không khí

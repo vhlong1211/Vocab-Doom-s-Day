@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
     }
     
     private float speed = 30f;
-
+    public char chosenChar;
     public void Setup(){
         //isSetup = true;
     }

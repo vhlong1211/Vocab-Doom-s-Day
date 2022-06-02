@@ -1,7 +1,9 @@
 
 public class TagUtility
 {
-
+    public const string TAG_BULLET = "Bullet";
+    public const string TAG_PLAYER = "Player";
+    public const string TAG_ENEMY = "Enemy";
 }
 
 public class AnimationTag{

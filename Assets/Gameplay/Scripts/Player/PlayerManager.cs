@@ -27,5 +27,5 @@ public class PlayerManager : MonoBehaviour
 
     public Transform player;
     public int health = 20;
-    public char chosenWord;
+    public char chosenChar;
 }
