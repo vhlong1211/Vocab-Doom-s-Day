@@ -20,6 +20,7 @@ public class Projectile : MonoBehaviour
     
     private float speed = 30f;
     public char chosenChar;
+    public ProjectileMover particle;
     public void Setup(){
         //isSetup = true;
     }
@@ -27,7 +28,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(DestroyBullet());
     }
 
     // Update is called once per frame
@@ -40,5 +41,17 @@ public class Projectile : MonoBehaviour
     {   
         //if(!isSetup)    return;
         Transform.position += Transform.forward * speed * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        particle.HandleCollision(transform.position);
+        GameObject.Destroy(gameObject);
+        StopAllCoroutines();
+    }
+
+    private IEnumerator DestroyBullet() { 
+        yield return new WaitForSeconds(3);
+        GameObject.Destroy(gameObject);
     }
 }

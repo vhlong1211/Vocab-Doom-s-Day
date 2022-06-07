@@ -14,13 +14,15 @@ public abstract class EnemyBaseState
         if (hit.transform.CompareTag(TagUtility.TAG_BULLET)) {
             char chosenChar = hit.gameObject.GetComponent<Projectile>().chosenChar;
             GameObject.Destroy(hit.gameObject);
+            int i = 0;
             foreach (KeyValuePair<char, int> entry in enemy.weakCharHolder) {
                 if (chosenChar.Equals(entry.Key)) {
                     TextMeshProUGUI charTxt = enemy.enemyCharUI.hiddenCharList[entry.Value];
                     charTxt.text = chosenChar.ToString();
-                    enemy.weakCharHolder.Remove(entry.Key);
+                    enemy.weakCharHolder.RemoveAt(i);
                     break;
                 }
+                i++;
             }
             if (enemy.weakCharHolder.Count == 0) {
                 enemy.Die();

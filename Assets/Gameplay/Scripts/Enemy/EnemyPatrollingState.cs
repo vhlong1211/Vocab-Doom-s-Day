@@ -6,6 +6,7 @@ public class EnemyPatrollingState : EnemyBaseState
     private float frontSightRange = 15f;
     private float backSightRange = 10f;
     private float walkPointRange = 10f;
+    private float maxSearchSenseRange = 30f;
     private float walkTimeKeeper = 0;
     private float searchTimeKeeper = 0;
     
@@ -20,7 +21,9 @@ public class EnemyPatrollingState : EnemyBaseState
 
     public override void OnTriggerEnter(EnemyStateManager enemy,Collider hit){
         base.OnTriggerEnter(enemy,hit);
-        enemy.SwitchState(enemy.ChasingState);
+        if (Vector3.Distance(enemy.transform.position, enemy.player.position) < maxSearchSenseRange) {
+            enemy.SwitchState(enemy.ChasingState);
+        }  
     }
 
     private void SearchWalkPoint(EnemyStateManager enemy){
@@ -43,9 +46,9 @@ public class EnemyPatrollingState : EnemyBaseState
         Vector3 dirToTarget = enemy.player.position - enemy.transform.position ;
         float dot = Vector3.Dot(enemy.transform.forward , dirToTarget);
 
-        if(distance < 10f && dot < 0){
+        if(distance < backSightRange && dot < 0){
             enemy.SwitchState(enemy.ChasingState);
-        }else if(distance < 15f && dot >= 0){
+        }else if(distance < frontSightRange && dot >= 0){
             enemy.SwitchState(enemy.ChasingState);
         }
     }

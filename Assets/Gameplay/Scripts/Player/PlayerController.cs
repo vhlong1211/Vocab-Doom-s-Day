@@ -10,16 +10,21 @@ public class PlayerController : MonoBehaviour
     public Transform gunPosition;
     public NavMeshAgent agent;
     public Transform bulletPrefab;
+    public List<ParticleSystem>  particlePrefabs;
+    public Transform particleHolder;
 
     private float rotateVelocity ;
     private float speed = 7;
     private bool isCasting = false;
+    private bool isCastingSkill = false;
     private Vector3 clickPosBuffer;
+    private int enemyLayerFilter = 64;
     
      
     // Start is called before the first frame update
     void Start()
     {
+        PlayerManager.Instance.chosenChar = 'a';
     }
 
     // Update is called once per frame
@@ -130,13 +135,19 @@ public class PlayerController : MonoBehaviour
             ChangeWord('z');
         }else if(Input.GetKeyDown(KeyCode.Alpha1)){
             //Debug.Log("1");
-            PlayerAnimator.Instance.CastSkill1();
+            //CastSkill1();
+            HandlePreCast();
+            PlayerAnimator.Instance.CastSkill1Anim();
         }else if(Input.GetKeyDown(KeyCode.Alpha2)){
             //Debug.Log("2");
-            PlayerAnimator.Instance.CastSkill2();
+            //CastSkill2();
+            HandlePreCast();
+            PlayerAnimator.Instance.CastSkill2Anim();
         }else if(Input.GetKeyDown(KeyCode.Alpha3)){
             //Debug.Log("3");
-            PlayerAnimator.Instance.CastSkill3();
+            //CastSkill3();
+            HandlePreCast();
+            PlayerAnimator.Instance.CastSkill3Anim();
         }else if(Input.GetKeyDown(KeyCode.Space)){
             //Debug.Log("Space");
             Blink();
@@ -154,14 +165,13 @@ public class PlayerController : MonoBehaviour
     }
 
     private void NormalAttack(){
-        agent.speed = 0;
-        agent.SetDestination(transform.position);
-        isCasting = true;
-        PlayerAnimator.Instance.Attack();
+        HandlePreCast();
+        isCastingSkill = false;
+        PlayerAnimator.Instance.AttackAnim();
     }
 
     private void DoRotation(){
-        if(!isCasting)  return;
+        if(!isCasting || isCastingSkill)  return;
         clickPosBuffer = new Vector3(clickPosBuffer.x,transform.position.y,clickPosBuffer.z);
         Quaternion rotationToLookAt = Quaternion.LookRotation(clickPosBuffer - transform.position);
         float angleDiff = Quaternion.Angle(transform.rotation,rotationToLookAt);
@@ -186,7 +196,14 @@ public class PlayerController : MonoBehaviour
 
     public void Blink(){
         if(isCasting)   return;
+
+        particleHolder.transform.position = transform.position;
+        particleHolder.eulerAngles = transform.eulerAngles;
+        particlePrefabs[3].gameObject.SetActive(true);
+        StartCoroutine(TurnOffParticle(particlePrefabs[3].gameObject));
+
         float blinkDistance = 5f;
+        particleHolder.transform.position = transform.position;
         agent.enabled = false;
         for(int i = 0 ; i < 10 ; i++){
             Vector3 destination = transform.position + transform.forward * (blinkDistance - blinkDistance * i/10);
@@ -197,15 +214,62 @@ public class PlayerController : MonoBehaviour
                 agent.enabled = true;
                 NavMeshHit hitParam;
                 if(NavMesh.SamplePosition(destination + transform.forward,out hitParam ,0f,NavMesh.AllAreas)){
-                    Debug.Log("case 1:"+ (destination + transform.forward));
+                    //Debug.Log("case 1:"+ (destination + transform.forward));
                     agent.SetDestination(destination + transform.forward);
-                }else{
-                    Debug.Log("case 2:"+destination);
+                }
+                else{
+                    //Debug.Log("case 2:"+destination);
                     agent.SetDestination(destination);
                 }
                 return;
             }
         }
         agent.enabled = true; 
+    }
+
+    public void CastSkill1() {
+        particleHolder.transform.position = transform.position;
+        particleHolder.eulerAngles = transform.eulerAngles;
+        particlePrefabs[0].gameObject.SetActive(true);
+        StartCoroutine(TurnOffParticle(particlePrefabs[0].gameObject));
+    }
+
+    public void CastSkill2()
+    {
+        particleHolder.transform.position = transform.position;
+        particleHolder.eulerAngles = transform.eulerAngles;
+        particlePrefabs[1].gameObject.SetActive(true);
+        StartCoroutine(TurnOffParticle(particlePrefabs[1].gameObject));
+    }
+
+    public void CastSkill3()
+    {       
+        particleHolder.transform.position = transform.position;
+        particleHolder.eulerAngles = transform.eulerAngles;
+        particlePrefabs[2].gameObject.SetActive(true);
+        StartCoroutine(TurnOffParticle(particlePrefabs[2].gameObject));
+        Skill3Power();
+    }
+
+    private void Skill3Power() {
+        List<EnemyStateManager> enemyAffected = EnemyManager.Instance.OverlapEnemy(transform, 7f, 100f);
+        foreach (EnemyStateManager enemy in enemyAffected) {
+            Vector3 pushDir = enemy.transform.position - transform.position;
+            enemy.SwitchState(enemy.PushBackState);
+            enemy.rbody.AddForce(pushDir.normalized * 5000);
+        }
+
+    }
+
+    private void HandlePreCast() {
+        agent.speed = 0;
+        agent.SetDestination(transform.position);
+        isCasting = true;
+        isCastingSkill = true;
+    }
+
+    public IEnumerator TurnOffParticle(GameObject particle) {
+        yield return new WaitForSeconds(2f);
+        particle.SetActive(false);
     }
 }

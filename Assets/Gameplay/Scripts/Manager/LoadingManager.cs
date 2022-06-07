@@ -40,7 +40,6 @@ public class LoadingManager : MonoBehaviour
         List<string> fileLines = File.ReadAllLines(filePath).ToList();
 
         foreach(string line in fileLines){
-            Debug.Log(line);
             string[] spliterArr = line.Split('=');
             dictionary.Add(spliterArr[0],spliterArr[1]);
         }

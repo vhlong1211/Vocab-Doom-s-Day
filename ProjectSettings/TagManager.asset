@@ -15,9 +15,9 @@ TagManager:
   - Enemy
   - Bullet
   - Player
-  - 
-  - 
-  - 
+  - Building
+  - EnemyBody
+  - BlockEnemy
   - 
   - 
   - 

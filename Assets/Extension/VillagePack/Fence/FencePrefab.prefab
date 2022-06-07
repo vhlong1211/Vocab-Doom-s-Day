@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 492008}
   - component: {fileID: 3337926}
   - component: {fileID: 2371860}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 416096}
   - component: {fileID: 987805286423963876}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FencePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 485428}
   - component: {fileID: 3350524}
   - component: {fileID: 2364154}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 414726}
   - component: {fileID: 3333366}
   - component: {fileID: 2350564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 476322}
   - component: {fileID: 3390268}
   - component: {fileID: 2344776}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

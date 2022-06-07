@@ -31,6 +31,9 @@ public class PlayerAnimator : MonoBehaviour
     public Animator anim;
     public UnityEvent stopCastingEvent;
     public UnityEvent shootEvent;
+    public UnityEvent castSkill1Event;
+    public UnityEvent castSkill2Event;
+    public UnityEvent castSkill3Event;
 
     float motionSmoothTime = 0.1f;
 
@@ -43,19 +46,19 @@ public class PlayerAnimator : MonoBehaviour
         anim.SetFloat("Speed",speed,motionSmoothTime,Time.deltaTime);
     }
 
-    public void CastSkill1(){
+    public void CastSkill1Anim(){
         anim.SetTrigger(AnimationTag.SKILL_1_TRIGGER);
     }
 
-    public void CastSkill2(){
+    public void CastSkill2Anim(){
         anim.SetTrigger(AnimationTag.SKILL_2_TRIGGER);
     }
 
-    public void CastSkill3(){
+    public void CastSkill3Anim(){
         anim.SetTrigger(AnimationTag.SKILL_3_TRIGGER);
     }
 
-    public void Attack(){
+    public void AttackAnim(){
         anim.SetTrigger(AnimationTag.ATTACK_TRIGGER);
     }
 
@@ -65,6 +68,20 @@ public class PlayerAnimator : MonoBehaviour
 
     public void Shoot(){
         shootEvent.Invoke();
+    }
+
+    public void UseSkill1() {
+        castSkill1Event.Invoke();
+    }
+
+    public void UseSkill2()
+    {
+        castSkill2Event.Invoke();
+    }
+
+    public void UseSkill3()
+    {
+        castSkill3Event.Invoke();
     }
 
 }

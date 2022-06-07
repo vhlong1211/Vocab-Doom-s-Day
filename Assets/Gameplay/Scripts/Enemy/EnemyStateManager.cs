@@ -10,13 +10,16 @@ public class EnemyStateManager : MonoBehaviour
     EnemyBaseState currentState;
     public EnemyChasingState ChasingState = new EnemyChasingState();
     public EnemyPatrollingState PatrollingState = new EnemyPatrollingState();
-    
+    public EnemyPushBackState PushBackState = new EnemyPushBackState();
+
     public NavMeshAgent agent;
+    public Rigidbody rbody;
     public EnemyCharUI enemyCharUI;
     [HideInInspector]
     public Transform player;
     [HideInInspector]
-    public Dictionary<char,int> weakCharHolder = new Dictionary<char,int>();
+    //public Dictionary<char,int> weakCharHolder = new Dictionary<char,int>();
+    public List<KeyValuePair<char, int>> weakCharHolder = new List<KeyValuePair<char, int>>();
     public Animator anim;
     
 
@@ -27,6 +30,8 @@ public class EnemyStateManager : MonoBehaviour
     void Start()
     {   
         player = PlayerManager.Instance.player;
+        EnemyManager.Instance.enemyList.Add(this);
+
         currentState = PatrollingState;
         LoadCharHolder();
         currentState.EnterState(this);
@@ -54,6 +59,7 @@ public class EnemyStateManager : MonoBehaviour
     }
 
     public void Die() {
+        EnemyManager.Instance.enemyList.Remove(this);
         GameObject.Destroy(gameObject);
     }
 
@@ -76,7 +82,8 @@ public class EnemyStateManager : MonoBehaviour
         {
             int weakIndex1 = Random.Range(0, charCount);
             weakIndexList.Add(weakIndex1);
-            weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
+            //weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
+            weakCharHolder.Add(new KeyValuePair<char, int>(pair.Key[weakIndex1], weakIndex1));
         }
         else if (charCount <= 10)
         {
@@ -87,8 +94,10 @@ public class EnemyStateManager : MonoBehaviour
             }
             weakIndexList.Add(weakIndex1);
             weakIndexList.Add(weakIndex2);
-            weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
-            weakCharHolder.Add(pair.Key[weakIndex2],weakIndex2);
+            //weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
+            //weakCharHolder.Add(pair.Key[weakIndex2],weakIndex2);
+            weakCharHolder.Add(new KeyValuePair<char, int>(pair.Key[weakIndex1], weakIndex1));
+            weakCharHolder.Add(new KeyValuePair<char, int>(pair.Key[weakIndex2], weakIndex2));
         }
         else {
             int weakIndex1 = Random.Range(0, charCount);
@@ -104,9 +113,12 @@ public class EnemyStateManager : MonoBehaviour
             weakIndexList.Add(weakIndex1);
             weakIndexList.Add(weakIndex2);
             weakIndexList.Add(weakIndex3);
-            weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
-            weakCharHolder.Add(pair.Key[weakIndex2],weakIndex2);
-            weakCharHolder.Add(pair.Key[weakIndex3],weakIndex3);
+            //weakCharHolder.Add(pair.Key[weakIndex1],weakIndex1);
+            //weakCharHolder.Add(pair.Key[weakIndex2],weakIndex2);
+            //weakCharHolder.Add(pair.Key[weakIndex3],weakIndex3);
+            weakCharHolder.Add(new KeyValuePair<char, int>(pair.Key[weakIndex1], weakIndex1));
+            weakCharHolder.Add(new KeyValuePair<char, int>(pair.Key[weakIndex2], weakIndex2));
+            weakCharHolder.Add(new KeyValuePair<char, int>(pair.Key[weakIndex3], weakIndex3));
         }
         enemyCharUI.Init(pair,weakIndexList);
     }
