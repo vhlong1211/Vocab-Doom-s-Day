@@ -34,6 +34,7 @@ public class PlayerAnimator : MonoBehaviour
     public UnityEvent castSkill1Event;
     public UnityEvent castSkill2Event;
     public UnityEvent castSkill3Event;
+    public UnityEvent skill1Power;
 
     float motionSmoothTime = 0.1f;
 
@@ -82,6 +83,10 @@ public class PlayerAnimator : MonoBehaviour
     public void UseSkill3()
     {
         castSkill3Event.Invoke();
+    }
+
+    public void Skill1Power() {
+        skill1Power.Invoke();
     }
 
 }

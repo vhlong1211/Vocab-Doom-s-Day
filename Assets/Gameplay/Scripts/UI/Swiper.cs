@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Swiper : MonoBehaviour
+{
+    public GameObject scrollbar;
+    public int currentPage;
+    private Scrollbar scrollbarReal;
+    float scroll_pos = 0;
+    float[] pos;
+    // Start is called before the first frame update
+    void Start()
+    {
+        scrollbarReal = scrollbar.GetComponent<Scrollbar>();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        pos = new float[transform.childCount];
+        float distance = 1f / (pos.Length - 1f);
+        for (int i = 0; i < pos.Length; i++)
+        {
+            pos[i] = distance * i;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            scroll_pos = scrollbarReal.value;
+        }
+        else {
+            for (int i = 0; i < pos.Length; i++) {
+                if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2)) {
+                    scrollbarReal.value = Mathf.Lerp(scrollbarReal.value, pos[i], 0.1f);
+                }
+            }
+        }
+
+        for (int i = 0; i < pos.Length; i++) {
+            if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - distance / 2) {
+                Debug.Log("page:" + i);
+                currentPage = i;
+                transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f, 1f), 0.1f);
+                for (int a = 0; a < pos.Length; a++) {
+                    if (a != i) {
+                        transform.GetChild(a).localScale = Vector2.Lerp(transform.GetChild(a).localScale, new Vector2(0.8f, 0.8f), 0.1f);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -22,4 +22,30 @@ public class GameManager : MonoBehaviour
     }
 
     public bool startGameplayTrigger = false;
+    public bool stopGameplayTrigger = false;
+
+    private void FixedUpdate()
+    {
+        if (startGameplayTrigger) {
+            Debug.Log("start trigger");
+            StartCoroutine(SpawnerManager.Instance.SpawnEnemy());
+            StartCoroutine(BuffManager.Instance.SpawnBuff());
+            startGameplayTrigger = false;
+        }
+
+        if (stopGameplayTrigger) {
+            Debug.Log("stop trigger");
+            StopGameplay();
+            stopGameplayTrigger = false;
+        }
+    }
+
+
+    //TODO hoan thanh not xu ly player chet
+    private void StopGameplay() {
+        EnemyManager.Instance.ResetAll();
+        SpawnerManager.Instance.StopAll();
+        CanvasGameplay.Instance.canvasDieScreen.OnOpen();
+        CanvasGameplay.Instance.timerClock.StopTime();
+    }
 }

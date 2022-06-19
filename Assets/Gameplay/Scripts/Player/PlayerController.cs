@@ -15,10 +15,13 @@ public class PlayerController : MonoBehaviour
 
     private float rotateVelocity ;
     private float speed = 7;
-    private bool isCasting = false;
-    private bool isCastingSkill = false;
+    [HideInInspector]
+    public bool isCasting = false;
+    //private bool isCastingSkill = false;
     private Vector3 clickPosBuffer;
+
     private int enemyLayerFilter = 64;
+    private int groundLayerFilter = 4096;
     
      
     // Start is called before the first frame update
@@ -30,19 +33,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerManager.Instance.isDead) return;
         if(Input.GetMouseButtonDown(1)){
             if(isCasting)   return;
             RaycastHit hit;
             //Check if raycast hit sthing
-            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity)){
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity,groundLayerFilter)){
                 //Move to the raycast point
+                clickPosBuffer = hit.point;
                 agent.SetDestination(hit.point);
             }
         } 
         if(Input.GetMouseButtonDown(0)){
             if(isCasting)   return;
             RaycastHit hit;
-            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity);
+            Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition),out hit,Mathf.Infinity,groundLayerFilter);
             clickPosBuffer = hit.point;
             NormalAttack();
         } 
@@ -137,6 +142,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("1");
             //CastSkill1();
             HandlePreCast();
+            //isCastingSkill = false;
             PlayerAnimator.Instance.CastSkill1Anim();
         }else if(Input.GetKeyDown(KeyCode.Alpha2)){
             //Debug.Log("2");
@@ -166,12 +172,12 @@ public class PlayerController : MonoBehaviour
 
     private void NormalAttack(){
         HandlePreCast();
-        isCastingSkill = false;
+        //isCastingSkill = false;
         PlayerAnimator.Instance.AttackAnim();
     }
 
     private void DoRotation(){
-        if(!isCasting || isCastingSkill)  return;
+        if(!isCasting )  return;
         clickPosBuffer = new Vector3(clickPosBuffer.x,transform.position.y,clickPosBuffer.z);
         Quaternion rotationToLookAt = Quaternion.LookRotation(clickPosBuffer - transform.position);
         float angleDiff = Quaternion.Angle(transform.rotation,rotationToLookAt);
@@ -182,6 +188,23 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation,rotationToLookAt,rotateVelocity*Time.deltaTime);
     }
 
+    public void GetHit() {
+        if (PlayerManager.Instance.health > 2)
+        {
+            PlayerManager.Instance.health -= 2;
+        }
+        else {
+            PlayerManager.Instance.health -= 2;
+            HandleDeath();
+        }
+    }
+
+    public void HandleDeath() {
+        PlayerAnimator.Instance.anim.SetTrigger("Death");
+        agent.speed = 0;
+        PlayerManager.Instance.isDead = true;
+        GameManager.Instance.stopGameplayTrigger = true;
+    }
     public void Shoot(){
         Transform bullet = Instantiate(bulletPrefab);
         bullet.GetComponent<Projectile>().chosenChar = PlayerManager.Instance.chosenChar;
@@ -197,13 +220,15 @@ public class PlayerController : MonoBehaviour
     public void Blink(){
         if(isCasting)   return;
 
-        particleHolder.transform.position = transform.position;
-        particleHolder.eulerAngles = transform.eulerAngles;
+        //particleHolder.transform.position = transform.position;
+        //particleHolder.eulerAngles = transform.eulerAngles;
+        particlePrefabs[3].transform.position = transform.position;
+        particlePrefabs[3].transform.eulerAngles = transform.eulerAngles;
         particlePrefabs[3].gameObject.SetActive(true);
         StartCoroutine(TurnOffParticle(particlePrefabs[3].gameObject));
 
         float blinkDistance = 5f;
-        particleHolder.transform.position = transform.position;
+        //particleHolder.transform.position = transform.position;
         agent.enabled = false;
         for(int i = 0 ; i < 10 ; i++){
             Vector3 destination = transform.position + transform.forward * (blinkDistance - blinkDistance * i/10);
@@ -240,6 +265,7 @@ public class PlayerController : MonoBehaviour
         particleHolder.eulerAngles = transform.eulerAngles;
         particlePrefabs[1].gameObject.SetActive(true);
         StartCoroutine(TurnOffParticle(particlePrefabs[1].gameObject));
+        Skill2Power();
     }
 
     public void CastSkill3()
@@ -258,14 +284,51 @@ public class PlayerController : MonoBehaviour
             enemy.SwitchState(enemy.PushBackState);
             enemy.rbody.AddForce(pushDir.normalized * 5000);
         }
+    }
 
+    private void Skill2Power()
+    {
+        List<EnemyStateManager> enemyAffected = EnemyManager.Instance.OverlapEnemy(transform, 10f, 360f);
+        StopCoroutine(ie_SpeedUpBuff());
+        //StopAllCoroutines();
+        StartCoroutine(ie_SpeedUpBuff());
+        foreach (EnemyStateManager enemy in enemyAffected)
+        {
+            enemy.SwitchState(enemy.StunState , 3f);
+        }
+    }
+
+    public void Skill1Power() {
+        float skillLength = 13f;
+        float skillWidth = 2f;
+        Vector3 startPoint = transform.position;
+        Vector3 endPoint = transform.position + transform.forward * skillLength;
+        List<EnemyStateManager> enemyAffected = EnemyManager.Instance.GetEnemyFoward(startPoint, endPoint, skillWidth);
+        foreach (EnemyStateManager enemy in enemyAffected)
+        {
+            enemy.enemyCharUI.floatingTextEng.gameObject.SetActive(true);
+        }
+
+    }
+
+    public IEnumerator ie_SpeedUpBuff() {
+        speed = 10f;
+        agent.speed = speed;
+        yield return new WaitForSeconds(10f);
+        speed = 7f;
+        agent.speed = speed;
+    }
+
+    public void GetHealth() {
+        PlayerManager.Instance.health += 5;
+        PlayerManager.Instance.health = PlayerManager.Instance.health > 20 ? 20 : PlayerManager.Instance.health;
     }
 
     private void HandlePreCast() {
         agent.speed = 0;
         agent.SetDestination(transform.position);
         isCasting = true;
-        isCastingSkill = true;
+        //isCastingSkill = true;
     }
 
     public IEnumerator TurnOffParticle(GameObject particle) {

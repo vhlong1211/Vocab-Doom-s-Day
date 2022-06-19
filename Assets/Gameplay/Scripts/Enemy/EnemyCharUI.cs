@@ -8,6 +8,8 @@ public class EnemyCharUI : MonoBehaviour
 {
     public Transform charHolder;
     public Transform panelPrefab;
+    public TextMesh floatingTextEng;
+    public TextMesh floatingTextViet;
 
     private float panelDistance = 380f;
     private float leftMargin;
@@ -27,14 +29,14 @@ public class EnemyCharUI : MonoBehaviour
     }
 
     void LateUpdate()
-    {
-        //playerHealthSlider.LookAt(Camera.main.transform);
-        //playerHealthSlider.Rotate(0, 180, 0);
-        //chosenCharUI.LookAt(Camera.main.transform);
-        //chosenCharUI.Rotate(0, 180, 0);
-        //charHolder.LookAt(Camera.main.transform);
+    {   
         charHolder.LookAt(Camera.main.transform);
-        charHolder.eulerAngles = new Vector3(-charHolder.eulerAngles.x, 0, 0);
+        Vector3 faceDirection = new Vector3(-charHolder.eulerAngles.x, 0, 0);
+
+        charHolder.eulerAngles = faceDirection;
+        if (floatingTextEng == null || floatingTextViet == null) return;
+        floatingTextEng.transform.eulerAngles = faceDirection;
+        floatingTextViet.transform.eulerAngles = faceDirection;
     }
 
     public void Init(KeyValuePair<string,string> pair,List<int> weakIndexList) {

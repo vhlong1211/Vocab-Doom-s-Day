@@ -26,8 +26,9 @@ public class CanvasMainMenu : UICanvas
         }
     }
 
-    public Transform startScreen;
-    public Transform loadingScreen;
+    //public Transform startScreen;
+    //public Transform loadingScreen;
+    public CanvasLoadingScreen canvasLoadingScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +43,9 @@ public class CanvasMainMenu : UICanvas
     }
 
     public void OnStartClick() {
-        startScreen.gameObject.SetActive(false);
-        loadingScreen.gameObject.SetActive(true);
+        //startScreen.gameObject.SetActive(false);
+        //loadingScreen.gameObject.SetActive(true);
         LoadingManager.Instance.LoadDictionary();
+
     }
 }

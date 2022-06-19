@@ -10,13 +10,19 @@ public abstract class EnemyBaseState
 
     public abstract void UpdateState(EnemyStateManager enemy);
 
+    public virtual void EnterState(EnemyStateManager enemy, float time) { }
+
+
     public virtual void OnTriggerEnter(EnemyStateManager enemy,Collider hit) {
-        if (hit.transform.CompareTag(TagUtility.TAG_BULLET)) {
+        if (hit.transform.CompareTag(TagUtility.TAG_BULLET))
+        {
             char chosenChar = hit.gameObject.GetComponent<Projectile>().chosenChar;
             GameObject.Destroy(hit.gameObject);
             int i = 0;
-            foreach (KeyValuePair<char, int> entry in enemy.weakCharHolder) {
-                if (chosenChar.Equals(entry.Key)) {
+            foreach (KeyValuePair<char, int> entry in enemy.weakCharHolder)
+            {
+                if (chosenChar.Equals(entry.Key))
+                {
                     TextMeshProUGUI charTxt = enemy.enemyCharUI.hiddenCharList[entry.Value];
                     charTxt.text = chosenChar.ToString();
                     enemy.weakCharHolder.RemoveAt(i);
@@ -24,9 +30,20 @@ public abstract class EnemyBaseState
                 }
                 i++;
             }
-            if (enemy.weakCharHolder.Count == 0) {
-                enemy.Die();
+            if (enemy.weakCharHolder.Count == 0)
+            {
+                enemy.PrepareDie();
+                //enemy.Die();
             }
+        }
+        else if (hit.transform.CompareTag(TagUtility.TAG_PLAYER)) {
+            foreach (KeyValuePair<char, int> entry in enemy.weakCharHolder)
+            {
+                TextMeshProUGUI charTxt = enemy.enemyCharUI.hiddenCharList[entry.Value];
+                charTxt.text = entry.Key.ToString();
+            }
+            enemy.PrepareDie();
+            PlayerManager.Instance.player.GetHit();
         }
     }
 

@@ -18,9 +18,9 @@ TagManager:
   - Building
   - EnemyBody
   - BlockEnemy
-  - 
-  - 
-  - 
+  - Ground
+  - Minimap
+  - Buff
   - 
   - 
   - 

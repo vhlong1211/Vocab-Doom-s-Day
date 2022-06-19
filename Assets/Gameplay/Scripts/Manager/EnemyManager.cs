@@ -35,4 +35,23 @@ public class EnemyManager : MonoBehaviour
         }
         return listReturn;
     }
+
+    public List<EnemyStateManager> GetEnemyFoward(Vector3 startPoint ,Vector3 endPoint , float width) {
+        List<EnemyStateManager> listReturn = new List<EnemyStateManager>();
+        foreach (EnemyStateManager enemy in enemyList)
+        {
+            float enemyDistance = MathUtility.DistancePointLine(enemy.transform.position, startPoint, endPoint);
+            if (enemyDistance < width) {
+                listReturn.Add(enemy);
+            }
+        }
+        return listReturn;
+    }
+
+    public void ResetAll() {
+        foreach (EnemyStateManager enemy in enemyList) {
+            GameObject.Destroy(enemy.gameObject);
+        }
+        enemyList.Clear();
+    }
 }

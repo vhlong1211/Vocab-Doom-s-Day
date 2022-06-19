@@ -28,6 +28,11 @@ public class CanvasGameplay : UICanvas
         }
         health = PlayerManager.Instance.health;
     }
+
+    //UI canvas
+    public CanvasDieScreen canvasDieScreen;
+    public TimerClock timerClock;
+
     //Variable of player stat
     private int health;
 

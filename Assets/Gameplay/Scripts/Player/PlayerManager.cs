@@ -25,7 +25,20 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    public Transform player;
+    public PlayerController player;
     public int health = 20;
+    [HideInInspector]
     public char chosenChar;
+    [HideInInspector]
+    public bool isDead = false;
+
+    public void ResetParam() {
+        player.transform.position = new Vector3(70, 0, 74);
+        player.agent.SetDestination(player.transform.position);
+        player.transform.eulerAngles = new Vector3(0, 0, 0);
+        health = 20;
+        isDead = false;
+        chosenChar = 'a';
+        player.isCasting = false;
+    }
 }

@@ -12,6 +12,9 @@ public class EnemyPatrollingState : EnemyBaseState
     
     public override void EnterState(EnemyStateManager enemy){
         enemy.agent.speed = 3;
+        enemy.anim.enabled = true;
+        enemy.anim.SetBool(AnimationTag.ENEMY_RUNNING_TRIGGER, false);
+        //Debug.Log("enter Patrolling State");
     }
 
     public override void UpdateState(EnemyStateManager enemy){
@@ -21,7 +24,7 @@ public class EnemyPatrollingState : EnemyBaseState
 
     public override void OnTriggerEnter(EnemyStateManager enemy,Collider hit){
         base.OnTriggerEnter(enemy,hit);
-        if (Vector3.Distance(enemy.transform.position, enemy.player.position) < maxSearchSenseRange) {
+        if (Vector3.Distance(enemy.transform.position, enemy.player.position) < maxSearchSenseRange && enemy.currentState !=enemy.DyingState) {
             enemy.SwitchState(enemy.ChasingState);
         }  
     }

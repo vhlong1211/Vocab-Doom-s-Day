@@ -13,4 +13,6 @@ public class AnimationTag{
     public const string DASH_TRIGGER = "Dash";
     public const string DEATH_TRIGGER = "Death";
     public const string ATTACK_TRIGGER = "Attack";
+    public const string ENEMY_DEAD_TRIGGER = "isDead";
+    public const string ENEMY_RUNNING_TRIGGER = "isRunning";
 }
