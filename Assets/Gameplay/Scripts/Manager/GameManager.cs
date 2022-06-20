@@ -28,8 +28,9 @@ public class GameManager : MonoBehaviour
     {
         if (startGameplayTrigger) {
             Debug.Log("start trigger");
-            StartCoroutine(SpawnerManager.Instance.SpawnEnemy());
-            StartCoroutine(BuffManager.Instance.SpawnBuff());
+            SpawnerManager.Instance.StartSpawnEnemy();
+            BuffManager.Instance.StartSpawnBuff();
+            CanvasGameplay.Instance.timerClock.Setup();
             startGameplayTrigger = false;
         }
 
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     private void StopGameplay() {
         EnemyManager.Instance.ResetAll();
         SpawnerManager.Instance.StopAll();
+        BuffManager.Instance.StopAll();
         CanvasGameplay.Instance.canvasDieScreen.OnOpen();
         CanvasGameplay.Instance.timerClock.StopTime();
     }

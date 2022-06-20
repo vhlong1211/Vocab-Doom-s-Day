@@ -79,6 +79,7 @@ public class EnemyStateManager : MonoBehaviour
     public void PrepareDie() {
         //Debug.Log("Prepare Die");
         EnemyManager.Instance.enemyList.Remove(this);
+        EnemyManager.Instance.deadEnemyCount++;
         SpawnerManager.Instance.enemyCount--;
         enemyCharUI.floatingTextViet.gameObject.SetActive(true);
         SwitchState(DyingState);

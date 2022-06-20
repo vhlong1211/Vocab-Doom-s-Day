@@ -26,6 +26,13 @@ public class BuffManager : MonoBehaviour
 
     public float spawnDuration = 5f;
 
+    public void StartSpawnBuff() {
+        StartCoroutine(SpawnBuff());
+    }
+
+    public void StopAll() {
+        StopAllCoroutines();
+    }
     public IEnumerator SpawnBuff() {
         while (true) {
             yield return new WaitForSeconds(spawnDuration);
@@ -37,7 +44,7 @@ public class BuffManager : MonoBehaviour
             {
                 //Chose buff type
                 Transform currentPrefab;
-                if (Random.Range(0f, 1f) < 0.7f)
+                if (Random.Range(0f, 1f) < 0.1f)
                 {
                     currentPrefab = Instantiate(healthPotionPrefab);
                 }

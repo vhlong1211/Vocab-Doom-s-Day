@@ -289,9 +289,9 @@ public class PlayerController : MonoBehaviour
     private void Skill2Power()
     {
         List<EnemyStateManager> enemyAffected = EnemyManager.Instance.OverlapEnemy(transform, 10f, 360f);
-        StopCoroutine(ie_SpeedUpBuff());
-        //StopAllCoroutines();
-        StartCoroutine(ie_SpeedUpBuff());
+        //StopCoroutine(ie_SpeedUpBuff());
+        //StartCoroutine(ie_SpeedUpBuff());
+        GetSpeedBuff();
         foreach (EnemyStateManager enemy in enemyAffected)
         {
             enemy.SwitchState(enemy.StunState , 3f);
@@ -317,6 +317,11 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(10f);
         speed = 7f;
         agent.speed = speed;
+    }
+
+    public void GetSpeedBuff() {
+        StopCoroutine("ie_SpeedUpBuff");
+        StartCoroutine("ie_SpeedUpBuff");
     }
 
     public void GetHealth() {

@@ -33,12 +33,14 @@ public class PlayerManager : MonoBehaviour
     public bool isDead = false;
 
     public void ResetParam() {
-        player.transform.position = new Vector3(70, 0, 74);
-        player.agent.SetDestination(player.transform.position);
+        player.agent.enabled = false;
+        player.transform.position = new Vector3(70, 0, 74);        
         player.transform.eulerAngles = new Vector3(0, 0, 0);
         health = 20;
         isDead = false;
         chosenChar = 'a';
         player.isCasting = false;
+        player.agent.enabled = true;
+        player.agent.SetDestination(player.transform.position);
     }
 }

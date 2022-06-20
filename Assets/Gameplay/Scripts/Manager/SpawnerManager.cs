@@ -32,6 +32,9 @@ public class SpawnerManager : MonoBehaviour
         //StartCoroutine(SpawnEnemy());
     }
 
+    public void StartSpawnEnemy() {
+        StartCoroutine(SpawnEnemy());
+    }
 
     public IEnumerator SpawnEnemy(){
         while(true)

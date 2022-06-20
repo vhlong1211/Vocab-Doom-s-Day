@@ -78,6 +78,8 @@
     <Compile Include="Assets\Gameplay\Scripts\UI\FloatingText.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMessage.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyCharUI.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\UI\CanvasProgressBar.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\Buff\HealthBuff.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\TimerClock.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasLoadingScreen.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMainMenu.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Extension\Hovl Studio\White mage spells\Scripts\ZoneTrigger.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasPlayoptionScreen.cs" />
     <Compile Include="Assets\Extension\GothicUI\Scripts\DayDurationController.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\Buff\SpeedBuff.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyChasingState.cs" />
     <Compile Include="Assets\Gameplay\Effects\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Camera\CameraScroll.cs" />
@@ -102,13 +105,12 @@
     <Compile Include="Assets\Extension\Hovl Studio\White mage spells\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyStunState.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\Swiper.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\Buff\IBuff.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Helper\MathUtility.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Manager\SpawnerManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\Rank\RankItem.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyPatrollingState.cs" />
-    <Compile Include="Assets\Gameplay\Scripts\Buff\HealthBuff.cs" />
-    <Compile Include="Assets\Gameplay\Scripts\Buff\SpeedBuff.cs" />
-    <Compile Include="Assets\Gameplay\Scripts\Buff\IBuff.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\Manager\DataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
@@ -117,8 +119,10 @@
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\Demo scene with projectiles\Documentation.txt" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Demo scene\HDRP and URP.txt" />
+    <None Include="Assets\StreamingAssets\DictionaryData\JSONB2.txt" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\LWRP\LWRP_Blend_CenterGlow.shader" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\StreamingAssets\DictionaryData\JSONB1.txt" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\Prefabs\Readme.txt" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\LWRP\LWRP_Blend_DistortTexture.shader" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -137,6 +141,7 @@
     <None Include="Assets\Gameplay\Model\Fantasy Chess RPG Character - Arthur\readme.txt" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Extension\GothicUI\Shaders\Fluid.shader" />
+    <None Include="Assets\StreamingAssets\DictionaryData\JSONA2.txt" />
     <None Include="Assets\StreamingAssets\DictionaryData\JSONTest.txt" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\LWRP\LWRP_Add_DistortTexture.shader" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Demo scene\Readme.txt" />
@@ -166,6 +171,7 @@
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Extension\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\StreamingAssets\DictionaryData\JSONC1.txt" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\Explosion.shader" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_Sprite.shader" />

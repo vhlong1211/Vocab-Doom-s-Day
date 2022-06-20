@@ -16,8 +16,7 @@ public class SpeedBuff : MonoBehaviour,IBuff
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != TagUtility.TAG_PLAYER) return;
-        StopCoroutine(PlayerManager.Instance.player.ie_SpeedUpBuff());
-        StartCoroutine(PlayerManager.Instance.player.ie_SpeedUpBuff());
+        PlayerManager.Instance.player.GetSpeedBuff();
         BuffManager.Instance.existBuffIndex.RemoveAll(x => x == index);
         GameObject.Destroy(gameObject);
     }

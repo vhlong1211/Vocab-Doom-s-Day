@@ -37,7 +37,7 @@ public class LoadingManager : MonoBehaviour
 
     public void LoadDictionary(){
         dictionary.Clear();
-        string filePath = Application.streamingAssetsPath + "/DictionaryData" + "/JSONTest.txt";
+        string filePath = Application.streamingAssetsPath + "/DictionaryData" + "/JSONC1.txt";
         List<string> fileLines = File.ReadAllLines(filePath).ToList();
         
         foreach(string line in fileLines){

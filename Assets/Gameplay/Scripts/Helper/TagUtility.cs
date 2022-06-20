@@ -16,3 +16,7 @@ public class AnimationTag{
     public const string ENEMY_DEAD_TRIGGER = "isDead";
     public const string ENEMY_RUNNING_TRIGGER = "isRunning";
 }
+
+public class DataTag {
+    public const string PLAYER_DATA = "Player_Data";
+}

@@ -12,8 +12,9 @@ public class TimerClock : MonoBehaviour
 
     // Start is called before the first frame update
 
-    void Setup() {
+    public void Setup() {
         startTime = Time.time;
+        isStopTime = false;
     }
     // Update is called once per frame
     void FixedUpdate()

@@ -20,6 +20,8 @@ public class EnemyManager : MonoBehaviour
     }
 
     public List<EnemyStateManager> enemyList = new List<EnemyStateManager>();
+    public int deadEnemyCount = 0;
+    public int maxEnemyDead = 200;
 
     public List<EnemyStateManager> OverlapEnemy(Transform main , float radius , float angle) {
         List<EnemyStateManager> listReturn = new List<EnemyStateManager>();
