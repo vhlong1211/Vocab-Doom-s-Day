@@ -35,9 +35,10 @@ public class LoadingManager : MonoBehaviour
         
     }
 
-    public void LoadDictionary(){
+    public void LoadDictionary(int page){
         dictionary.Clear();
-        string filePath = Application.streamingAssetsPath + "/DictionaryData" + "/JSONC1.txt";
+        string type = MathUtility.IndexToLevelType(page);
+        string filePath = Application.streamingAssetsPath + "/DictionaryData" + "/JSON"+type+".txt";
         List<string> fileLines = File.ReadAllLines(filePath).ToList();
         
         foreach(string line in fileLines){

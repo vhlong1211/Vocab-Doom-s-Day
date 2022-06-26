@@ -45,7 +45,7 @@ public class CanvasMainMenu : UICanvas
     public void OnStartClick() {
         //startScreen.gameObject.SetActive(false);
         //loadingScreen.gameObject.SetActive(true);
-        LoadingManager.Instance.LoadDictionary();
+        //LoadingManager.Instance.LoadDictionary();
 
     }
 }

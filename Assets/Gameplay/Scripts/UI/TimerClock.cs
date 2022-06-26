@@ -7,6 +7,7 @@ using TMPro;
 public class TimerClock : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
+    public float currentTime;
     private float startTime;
     private bool isStopTime = false;
 
@@ -17,10 +18,11 @@ public class TimerClock : MonoBehaviour
         isStopTime = false;
     }
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (isStopTime) return;
         float t = Time.time - startTime;
+        currentTime = t;
         string minutes = ((int)t / 60).ToString();
         string seconds = (t % 60).ToString("f0");
         timerText.text = minutes + ":" + seconds;

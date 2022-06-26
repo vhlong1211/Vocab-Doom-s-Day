@@ -820,6 +820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasLoadingScreen: {fileID: 0}
+  canvasPlayOptionScreen: {fileID: 0}
 --- !u!1 &6875524757913502144
 GameObject:
   m_ObjectHideFlags: 0

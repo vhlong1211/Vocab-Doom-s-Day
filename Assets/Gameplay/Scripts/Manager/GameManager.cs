@@ -23,11 +23,20 @@ public class GameManager : MonoBehaviour
 
     public bool startGameplayTrigger = false;
     public bool stopGameplayTrigger = false;
+    public bool isWin = false;
+    public string currentLevel;
 
-    private void FixedUpdate()
+
+    private void Start()
+    {
+        DataManager.Instance.LoadData();
+        SoundManager.Instance.PlayBackgroundSound(SoundManager.Instance.MenuBgSound);
+        //Debug.Log(DataManager.Instance.playerData.rankData["A1"].Count + "-----");
+    }
+
+    private void Update()
     {
         if (startGameplayTrigger) {
-            Debug.Log("start trigger");
             SpawnerManager.Instance.StartSpawnEnemy();
             BuffManager.Instance.StartSpawnBuff();
             CanvasGameplay.Instance.timerClock.Setup();
@@ -35,7 +44,6 @@ public class GameManager : MonoBehaviour
         }
 
         if (stopGameplayTrigger) {
-            Debug.Log("stop trigger");
             StopGameplay();
             stopGameplayTrigger = false;
         }
@@ -46,8 +54,40 @@ public class GameManager : MonoBehaviour
     private void StopGameplay() {
         EnemyManager.Instance.ResetAll();
         SpawnerManager.Instance.StopAll();
-        BuffManager.Instance.StopAll();
-        CanvasGameplay.Instance.canvasDieScreen.OnOpen();
+        BuffManager.Instance.StopAll();        
         CanvasGameplay.Instance.timerClock.StopTime();
+        SoundManager.Instance.StopBgMusic();
+        if (!isWin)
+        {
+            CanvasGameplay.Instance.canvasDieScreen.OnOpen();
+        }
+        else {
+            HandleWin();
+        }
+    }
+
+    private void HandleWin() {
+        isWin = false;
+        CanvasGameplay.Instance.canvasWinScreen.OnOpen();
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.WinSound);
+        //Save highscore
+        if (DataManager.Instance.playerData.rankData.ContainsKey(currentLevel))
+        {
+            List<float> tempList = DataManager.Instance.playerData.rankData[currentLevel];
+            tempList.Add(CanvasGameplay.Instance.timerClock.currentTime);
+            tempList.Sort();
+
+        }
+        else {
+            List<float> tempList = new List<float>();
+            tempList.Add(CanvasGameplay.Instance.timerClock.currentTime);
+            DataManager.Instance.playerData.rankData.Add(currentLevel, tempList);
+        }
+        //Save Level
+        int curLv = MathUtility.LevelTypeToIndex(currentLevel);
+        if (curLv == DataManager.Instance.playerData.mapLevel && curLv < 4) {
+            DataManager.Instance.playerData.mapLevel = curLv + 1;
+        }
+        DataManager.Instance.SaveData();
     }
 }

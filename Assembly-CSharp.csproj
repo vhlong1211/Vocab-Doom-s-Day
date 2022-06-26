@@ -64,6 +64,7 @@
     <Compile Include="Assets\Gameplay\Scripts\Bullet\Projectile.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Manager\BuffManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasChooseMap.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\Manager\DataManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyStateManager.cs" />
     <Compile Include="Assets\Extension\GothicUI\Scripts\HPFlowController.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\UIManager.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\Gameplay\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Gameplay\Effects\AAA Projectiles\Scripts\ParticleCollisionInstance.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasGameplay.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyPushBackState.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\FloatingText.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMessage.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Assets\Extension\GothicUI\Scripts\DayDurationController.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Buff\SpeedBuff.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyChasingState.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\UI\CanvasWinScreen.cs" />
     <Compile Include="Assets\Gameplay\Effects\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Camera\CameraScroll.cs" />
     <Compile Include="Assets\Gameplay\Effects\AAA Projectiles\Demo scene with projectiles\DemoShooting.cs" />
@@ -110,7 +113,6 @@
     <Compile Include="Assets\Gameplay\Scripts\Manager\SpawnerManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\Rank\RankItem.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyPatrollingState.cs" />
-    <Compile Include="Assets\Gameplay\Scripts\Manager\DataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
@@ -135,14 +137,18 @@
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\StreamingAssets\DictionaryData\JSONA1.txt" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\Ice.shader" />
+    <None Include="Assets\Extension\JsonDotNet\link.xml" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\Distortion.shader" />
+    <None Include="Assets\Extension\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.XML" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\Blend_TwoSides.shader" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\LWRP\LWRP_Electricity.shader" />
     <None Include="Assets\Gameplay\Model\Fantasy Chess RPG Character - Arthur\readme.txt" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Extension\GothicUI\Shaders\Fluid.shader" />
+    <None Include="Assets\Extension\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.XML" />
     <None Include="Assets\StreamingAssets\DictionaryData\JSONA2.txt" />
     <None Include="Assets\StreamingAssets\DictionaryData\JSONTest.txt" />
+    <None Include="Assets\Extension\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\LWRP\LWRP_Add_DistortTexture.shader" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Demo scene\Readme.txt" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
@@ -156,11 +162,14 @@
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Extension\Hovl Studio\White mage spells\Shaders\Blend_LinePath.shader" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Extension\JsonDotNet\Assemblies\AOT\Newtonsoft.Json.dll" />
+    <None Include="Assets\Extension\JsonDotNet\Assemblies\AOT\Newtonsoft.Json.XML" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\BlendDistort.shader" />
     <None Include="Assets\Extension\FantasyEnvironments\Environments\README.txt" />
     <None Include="Assets\Extension\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\Shaders\Add_Trail.shader" />
     <None Include="Assets\Gameplay\Effects\Sword slash VFX\Shaders\Scroll.shader" />
+    <None Include="Assets\Extension\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.dll" />
     <None Include="Assets\Extension\Hovl Studio\White mage spells\Shaders\Fire.shader" />
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\LWRP\LWRP_Add_CenterGlow.shader" />
     <None Include="Assets\Extension\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
@@ -399,6 +408,9 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\From c vi qua day\Unity\2020.3.20f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Extension\JsonDotNet\Assemblies\Standalone\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:\From c vi qua day\Unity\2020.3.20f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

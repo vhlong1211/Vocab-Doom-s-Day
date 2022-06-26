@@ -16,6 +16,7 @@ public class HealthBuff : MonoBehaviour,IBuff
     {
         if (other.tag != TagUtility.TAG_PLAYER) return;
         PlayerManager.Instance.player.GetHealth();
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.HealingSound);
         BuffManager.Instance.existBuffIndex.RemoveAll(x => x == index);
         GameObject.Destroy(gameObject);
     }

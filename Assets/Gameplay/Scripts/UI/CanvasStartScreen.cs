@@ -33,8 +33,29 @@ public class CanvasStartScreen : MonoBehaviour
         //canvasLoadingScreen.OnOpen();
         //LoadingManager.Instance.LoadDictionary();
         //gameObject.SetActive(false);
-
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
         canvasPlayOptionScreen.OnOpen();
         gameObject.SetActive(false);
+    }
+
+    public void OnTutoClick() {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+    }
+
+    public void OnSettingClick() {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+    }
+
+    public void OnQuitClick() {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound); 
+    }
+
+    public void OnOpen() {
+        gameObject.SetActive(true);
+    }
+
+    public void OnClose()
+    {
+        gameObject.SetActive(true);
     }
 }

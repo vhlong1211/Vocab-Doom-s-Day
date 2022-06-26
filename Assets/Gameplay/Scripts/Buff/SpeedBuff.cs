@@ -16,6 +16,7 @@ public class SpeedBuff : MonoBehaviour,IBuff
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != TagUtility.TAG_PLAYER) return;
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.BuffSpeedSound);
         PlayerManager.Instance.player.GetSpeedBuff();
         BuffManager.Instance.existBuffIndex.RemoveAll(x => x == index);
         GameObject.Destroy(gameObject);

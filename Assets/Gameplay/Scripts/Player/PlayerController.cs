@@ -204,8 +204,10 @@ public class PlayerController : MonoBehaviour
         agent.speed = 0;
         PlayerManager.Instance.isDead = true;
         GameManager.Instance.stopGameplayTrigger = true;
+        GameManager.Instance.isWin = false;
     }
     public void Shoot(){
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.shotSound);
         Transform bullet = Instantiate(bulletPrefab);
         bullet.GetComponent<Projectile>().chosenChar = PlayerManager.Instance.chosenChar;
         bullet.position = gunPosition.position;
@@ -225,6 +227,7 @@ public class PlayerController : MonoBehaviour
         particlePrefabs[3].transform.position = transform.position;
         particlePrefabs[3].transform.eulerAngles = transform.eulerAngles;
         particlePrefabs[3].gameObject.SetActive(true);
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.BlinkSound);
         StartCoroutine(TurnOffParticle(particlePrefabs[3].gameObject));
 
         float blinkDistance = 5f;
@@ -253,6 +256,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void CastSkill1() {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.Skill1Sound);
         particleHolder.transform.position = transform.position;
         particleHolder.eulerAngles = transform.eulerAngles;
         particlePrefabs[0].gameObject.SetActive(true);
@@ -261,6 +265,7 @@ public class PlayerController : MonoBehaviour
 
     public void CastSkill2()
     {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.Skill2Sound);
         particleHolder.transform.position = transform.position;
         particleHolder.eulerAngles = transform.eulerAngles;
         particlePrefabs[1].gameObject.SetActive(true);
@@ -269,7 +274,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void CastSkill3()
-    {       
+    {
         particleHolder.transform.position = transform.position;
         particleHolder.eulerAngles = transform.eulerAngles;
         particlePrefabs[2].gameObject.SetActive(true);
@@ -280,6 +285,7 @@ public class PlayerController : MonoBehaviour
     private void Skill3Power() {
         List<EnemyStateManager> enemyAffected = EnemyManager.Instance.OverlapEnemy(transform, 7f, 100f);
         foreach (EnemyStateManager enemy in enemyAffected) {
+            SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.Skill3Sound);
             Vector3 pushDir = enemy.transform.position - transform.position;
             enemy.SwitchState(enemy.PushBackState);
             enemy.rbody.AddForce(pushDir.normalized * 5000);

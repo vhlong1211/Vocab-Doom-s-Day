@@ -40,6 +40,7 @@ public class CanvasLoadingScreen : MonoBehaviour
     public void OnClose()
     {
         gameObject.SetActive(false);
+        SoundManager.Instance.PlayBackgroundSound(SoundManager.Instance.GameplaySound);
         loadingSlider.value = 1;
         timerClock.OnOpen();
     }

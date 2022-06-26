@@ -200,7 +200,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4952411754930595234}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5209621806773338580}
+        m_TargetAssemblyTypeName: CanvasPlayoptionScreen, Assembly-CSharp
+        m_MethodName: OnMainModeClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4952411754947584998
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +488,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4952411755317863245}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5209621806773338580}
+        m_TargetAssemblyTypeName: CanvasPlayoptionScreen, Assembly-CSharp
+        m_MethodName: OnHighscoreClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4952411755451841040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,6 +1394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7619058833bbe4c8840b6b6964cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasHighscoreScreen: {fileID: 0}
+  canvasChooseMapScreen: {fileID: 0}
 --- !u!1 &4952411756756268638
 GameObject:
   m_ObjectHideFlags: 0

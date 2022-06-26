@@ -23,5 +23,7 @@ public class CanvasDieScreen : MonoBehaviour
         PlayerManager.Instance.ResetParam();
         OnClose();
         canvasChooseMapScreen.OnOpen();
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        SoundManager.Instance.PlayBackgroundSound(SoundManager.Instance.MenuBgSound);
     }
 }

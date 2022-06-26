@@ -24,4 +24,56 @@ public class MathUtility : MonoBehaviour
     {
         return Vector3.Magnitude(ProjectPointLine(point, lineStart, lineEnd) - point);
     }
+
+    public static string IndexToLevelType(int i) {
+        if (i == 0)
+        {
+            return "A1";
+        }
+        else if (i == 1)
+        {
+            return "A2";
+        }
+        else if (i == 2)
+        {
+            return "B1";
+        }
+        else if (i == 3)
+        {
+            return "B2";
+        }
+        else if (i == 4)
+        {
+            return "C1";
+        }
+        else {
+            return null;
+        }
+    }
+
+    public static int LevelTypeToIndex(string str) {
+        if (str == "A1")
+        {
+            return 0;
+        }
+        else if (str == "A2")
+        {
+            return 1;
+        }
+        else if (str == "B1")
+        {
+            return 2;
+        }
+        else if (str == "B2")
+        {
+            return 3;
+        }
+        else if (str == "C1")
+        {
+            return 4;
+        }
+        else {
+            return 100;
+        }
+    }
 }

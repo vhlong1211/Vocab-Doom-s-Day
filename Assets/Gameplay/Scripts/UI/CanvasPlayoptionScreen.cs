@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CanvasPlayoptionScreen : MonoBehaviour
 {
+    public CanvasHighscoreScreen canvasHighscoreScreen;
+    public CanvasStartScreen canvasStartScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +26,32 @@ public class CanvasPlayoptionScreen : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void OnClose()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void OnMainModeClick() {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
         canvasChooseMapScreen.OnOpen();
         gameObject.SetActive(false);
+    }
+
+    public void OnHighscoreClick() {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        canvasHighscoreScreen.OnOpen();
+        gameObject.SetActive(false);
+    }
+
+    public void OnCustomClick()
+    {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+    }
+
+    public void OnBackClick() {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        OnClose();
+        canvasStartScreen.OnOpen();
     }
 
 }

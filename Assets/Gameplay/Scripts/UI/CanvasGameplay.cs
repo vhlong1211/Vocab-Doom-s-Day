@@ -31,6 +31,7 @@ public class CanvasGameplay : UICanvas
 
     //UI canvas
     public CanvasDieScreen canvasDieScreen;
+    public CanvasWinScreen canvasWinScreen;
     public TimerClock timerClock;
 
     //Variable of player stat

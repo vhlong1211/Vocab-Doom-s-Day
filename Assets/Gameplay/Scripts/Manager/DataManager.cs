@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
 public class DataManager : MonoBehaviour
 {
@@ -21,15 +22,18 @@ public class DataManager : MonoBehaviour
     public PlayerData playerData;
     public void LoadData() {
         var data = PlayerPrefs.GetString(DataTag.PLAYER_DATA, "");
+        Debug.Log(data + "  haha");
         if (data != "")
         {
-            playerData = JsonUtility.FromJson<PlayerData>(data);
+            //playerData = JsonUtility.FromJson<PlayerData>(data);
+            playerData = JsonConvert.DeserializeObject<PlayerData>(data);
         }
     }
 
     public void SaveData() {
         var json = JsonUtility.ToJson(playerData);
-        PlayerPrefs.SetString(DataTag.PLAYER_DATA, json);
+        var json2 = JsonConvert.SerializeObject(playerData);
+        PlayerPrefs.SetString(DataTag.PLAYER_DATA, json2);
     }
 
 }
@@ -37,7 +41,7 @@ public class DataManager : MonoBehaviour
 [System.Serializable]
 public class PlayerData {
     public int health;
+    public int mapLevel;
 
     public Dictionary<string, List<float>> rankData = new Dictionary<string, List<float>>();
-
 }

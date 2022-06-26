@@ -17,7 +17,7 @@ public class Swiper : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         pos = new float[transform.childCount];
         float distance = 1f / (pos.Length - 1f);

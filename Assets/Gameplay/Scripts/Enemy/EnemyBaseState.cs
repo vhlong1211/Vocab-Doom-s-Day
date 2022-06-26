@@ -19,16 +19,25 @@ public abstract class EnemyBaseState
             char chosenChar = hit.gameObject.GetComponent<Projectile>().chosenChar;
             GameObject.Destroy(hit.gameObject);
             int i = 0;
+            bool isHit = false;
             foreach (KeyValuePair<char, int> entry in enemy.weakCharHolder)
             {
                 if (chosenChar.Equals(entry.Key))
                 {
+                    isHit = true;
                     TextMeshProUGUI charTxt = enemy.enemyCharUI.hiddenCharList[entry.Value];
                     charTxt.text = chosenChar.ToString();
                     enemy.weakCharHolder.RemoveAt(i);
                     break;
                 }
                 i++;
+            }
+            if (isHit)
+            {
+                SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.HitSound2);
+            }
+            else {
+                SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.HitSound1);
             }
             if (enemy.weakCharHolder.Count == 0)
             {
