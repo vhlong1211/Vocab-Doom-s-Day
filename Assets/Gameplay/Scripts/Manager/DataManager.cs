@@ -42,6 +42,11 @@ public class DataManager : MonoBehaviour
 public class PlayerData {
     public int health;
     public int mapLevel;
+    public int gold;
+    public int upgradeAtkLevel;
+    public int upgradeHealthLevel;
+    public int upgradeSpeedLevel;
+    public int upgradeCooldownLevel;
 
     public Dictionary<string, List<float>> rankData = new Dictionary<string, List<float>>();
 }

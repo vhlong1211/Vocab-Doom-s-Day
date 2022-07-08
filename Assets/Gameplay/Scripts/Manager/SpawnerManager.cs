@@ -19,6 +19,7 @@ public class SpawnerManager : MonoBehaviour
         }
     }
 
+    public Transform enemyPool;
     public GameObject enemyPrefab;
     public List<Transform> spawnPlaces = new List<Transform>();
 
@@ -30,6 +31,7 @@ public class SpawnerManager : MonoBehaviour
     void Start()
     {
         //StartCoroutine(SpawnEnemy());
+        SimplePool.Preload(enemyPrefab, 20, enemyPool);
     }
 
     public void StartSpawnEnemy() {
@@ -47,7 +49,8 @@ public class SpawnerManager : MonoBehaviour
                 float spawnWellIndex = Random.Range(0, 5);
                 Transform spawnWell = spawnPlaces[Mathf.FloorToInt(spawnWellIndex)];
                 Vector3 spawnPosition = new Vector3(spawnWell.position.x + randomXDir * spawnOffset, 0, spawnWell.position.z + randomZDir * spawnOffset);
-                Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                //Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                SimplePool.Spawn(enemyPrefab, spawnPosition, Quaternion.identity);
                 enemyCount++;
             }
             yield return new WaitForSeconds(2f);

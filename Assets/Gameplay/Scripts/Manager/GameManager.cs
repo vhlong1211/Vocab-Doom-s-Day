@@ -26,10 +26,11 @@ public class GameManager : MonoBehaviour
     public bool isWin = false;
     public string currentLevel;
 
-
+    public CanvasBookScreen bookScreen;
     private void Start()
     {
         DataManager.Instance.LoadData();
+        bookScreen.LoadBook();
         SoundManager.Instance.PlayBackgroundSound(SoundManager.Instance.MenuBgSound);
         //Debug.Log(DataManager.Instance.playerData.rankData["A1"].Count + "-----");
     }
@@ -40,6 +41,10 @@ public class GameManager : MonoBehaviour
             SpawnerManager.Instance.StartSpawnEnemy();
             BuffManager.Instance.StartSpawnBuff();
             CanvasGameplay.Instance.timerClock.Setup();
+            PlayerManager.Instance.isStartGame = true;
+            PlayerManager.Instance.InitPlayerStat();
+            PlayerManager.Instance.player.GetStat();
+            CanvasGameplay.Instance.Setup();
             startGameplayTrigger = false;
         }
 
@@ -57,6 +62,8 @@ public class GameManager : MonoBehaviour
         BuffManager.Instance.StopAll();        
         CanvasGameplay.Instance.timerClock.StopTime();
         SoundManager.Instance.StopBgMusic();
+        PlayerManager.Instance.isStartGame = false;
+        DataManager.Instance.playerData.gold += PlayerManager.Instance.goldCollected;
         if (!isWin)
         {
             CanvasGameplay.Instance.canvasDieScreen.OnOpen();
@@ -64,6 +71,7 @@ public class GameManager : MonoBehaviour
         else {
             HandleWin();
         }
+        DataManager.Instance.SaveData();
     }
 
     private void HandleWin() {
@@ -88,6 +96,5 @@ public class GameManager : MonoBehaviour
         if (curLv == DataManager.Instance.playerData.mapLevel && curLv < 4) {
             DataManager.Instance.playerData.mapLevel = curLv + 1;
         }
-        DataManager.Instance.SaveData();
     }
 }

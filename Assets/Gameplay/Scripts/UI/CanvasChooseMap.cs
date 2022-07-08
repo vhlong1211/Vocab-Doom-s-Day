@@ -7,6 +7,7 @@ public class CanvasChooseMap : MonoBehaviour
 
     public CanvasLoadingScreen canvasLoadingScreen;
     public CanvasPlayoptionScreen playoptionScreen;
+    public CanvasBookScreen bookScreen;
     public Swiper swiper;
     public List<GameObject> lockerList = new List<GameObject>();
 
@@ -37,6 +38,13 @@ public class CanvasChooseMap : MonoBehaviour
         GameManager.Instance.currentLevel = MathUtility.IndexToLevelType(swiper.currentPage);
         Debug.Log("swiper:" + swiper.currentPage);
         gameObject.SetActive(false);
+    }
+
+    public void OnReadClick() {
+        if (swiper.currentPage > DataManager.Instance.playerData.mapLevel) return;
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.openBookSound);
+        bookScreen.OnOpen();
+        bookScreen.OpenBook(swiper.currentPage);
     }
 
     public void OnBack()

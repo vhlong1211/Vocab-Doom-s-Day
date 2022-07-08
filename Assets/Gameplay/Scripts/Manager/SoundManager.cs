@@ -37,6 +37,9 @@ public class SoundManager : MonoBehaviour
     public SoundInfor BlinkSound;
     public SoundInfor HitSound1;
     public SoundInfor HitSound2;
+    public SoundInfor UpgradeSound;
+    public SoundInfor ShieldSwingSound;
+    public SoundInfor openBookSound;
 
     void Awake()
     {

@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634e9cf2c20ff2048a514ef03f977db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  existTime: 3
+  existTime: 2.5
 --- !u!95 &2816100547539063421
 Animator:
   serializedVersion: 3
@@ -519,11 +519,11 @@ GameObject:
   - component: {fileID: 4536718533742932936}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7974358777262550356
 Transform:
   m_ObjectHideFlags: 0

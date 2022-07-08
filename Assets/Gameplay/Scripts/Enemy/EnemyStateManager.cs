@@ -34,15 +34,20 @@ public class EnemyStateManager : MonoBehaviour
     private void Awake() {
         
     }
+    private void OnEnable()
+    {
+        EnemyManager.Instance.enemyList.Add(this);
+        agent.enabled = true;
+        collider.enabled = true;
+        currentState = PatrollingState;
+        LoadCharHolder();
+        currentState.EnterState(this);
+    }
     // Start is called before the first frame update
     void Start()
     {   
         player = PlayerManager.Instance.player.transform;
-        EnemyManager.Instance.enemyList.Add(this);
 
-        currentState = PatrollingState;
-        LoadCharHolder();
-        currentState.EnterState(this);
     }
 
     // Update is called once per frame
@@ -73,7 +78,13 @@ public class EnemyStateManager : MonoBehaviour
 
     public void Die() {
 
-        GameObject.Destroy(gameObject);
+        //GameObject.Destroy(gameObject);
+        enemyCharUI.hiddenCharList.Clear();
+        weakCharHolder.Clear();
+        foreach (Transform child in enemyCharUI.charHolder) {
+            Destroy(child.gameObject);
+        }
+        SimplePool.Despawn(gameObject);
     }
 
     public void PrepareDie() {

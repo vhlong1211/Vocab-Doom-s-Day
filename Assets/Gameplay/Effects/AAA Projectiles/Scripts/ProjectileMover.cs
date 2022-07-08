@@ -56,6 +56,6 @@ public class ProjectileMover : MonoBehaviour
                 Destroy(hitInstance, hitPsParts.main.duration);
             }
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

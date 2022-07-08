@@ -17,7 +17,8 @@ public abstract class EnemyBaseState
         if (hit.transform.CompareTag(TagUtility.TAG_BULLET))
         {
             char chosenChar = hit.gameObject.GetComponent<Projectile>().chosenChar;
-            GameObject.Destroy(hit.gameObject);
+            //GameObject.Destroy(hit.gameObject);
+            SimplePool.Despawn(hit.gameObject);
             int i = 0;
             bool isHit = false;
             foreach (KeyValuePair<char, int> entry in enemy.weakCharHolder)
@@ -41,6 +42,7 @@ public abstract class EnemyBaseState
             }
             if (enemy.weakCharHolder.Count == 0)
             {
+                PlayerManager.Instance.goldCollected += Random.Range(10, 15);
                 enemy.PrepareDie();
                 //enemy.Die();
             }

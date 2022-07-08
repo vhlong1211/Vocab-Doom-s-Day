@@ -12,15 +12,23 @@ public class PlayerController : MonoBehaviour
     public Transform bulletPrefab;
     public List<ParticleSystem>  particlePrefabs;
     public Transform particleHolder;
+    public Transform bulletPool;
 
     private float rotateVelocity ;
     private float speed = 7;
+    private float cooldown1;
+    private bool isCooldown1;
+    private float cooldown2;
+    private bool isCooldown2;
+    private float cooldown3;
+    private bool isCooldown3;
+    private float cooldown4;
+    private bool isCooldown4;
+
     [HideInInspector]
     public bool isCasting = false;
-    //private bool isCastingSkill = false;
     private Vector3 clickPosBuffer;
 
-    private int enemyLayerFilter = 64;
     private int groundLayerFilter = 4096;
     
      
@@ -28,13 +36,16 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         PlayerManager.Instance.chosenChar = 'a';
+        SimplePool.Preload(bulletPrefab.gameObject,10,bulletPool);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!PlayerManager.Instance.isStartGame) return;
         if (PlayerManager.Instance.isDead) return;
-        if(Input.GetMouseButtonDown(1)){
+        HandleCooldown();
+        if (Input.GetMouseButtonDown(1)){
             if(isCasting)   return;
             RaycastHit hit;
             //Check if raycast hit sthing
@@ -56,7 +67,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void HandleKeyboardInput(){
-        if(isCasting)   return;
+        //if(isCasting)   return;
         if (Input.anyKeyDown && !Input.GetMouseButtonDown(1)){
         // Stopwatch stopwatch = new Stopwatch();
         // stopwatch.Start();
@@ -140,23 +151,28 @@ public class PlayerController : MonoBehaviour
             ChangeWord('z');
         }else if(Input.GetKeyDown(KeyCode.Alpha1)){
             //Debug.Log("1");
-            //CastSkill1();
+            if(isCasting || isCooldown1)   return;
             HandlePreCast();
             //isCastingSkill = false;
             PlayerAnimator.Instance.CastSkill1Anim();
+            isCooldown1 = true;
         }else if(Input.GetKeyDown(KeyCode.Alpha2)){
             //Debug.Log("2");
-            //CastSkill2();
+            if(isCasting || isCooldown2)   return;
             HandlePreCast();
             PlayerAnimator.Instance.CastSkill2Anim();
+            isCooldown2 = true;
         }else if(Input.GetKeyDown(KeyCode.Alpha3)){
             //Debug.Log("3");
-            //CastSkill3();
+            if(isCasting || isCooldown3)   return;
             HandlePreCast();
             PlayerAnimator.Instance.CastSkill3Anim();
+            isCooldown3 = true;
         }else if(Input.GetKeyDown(KeyCode.Space)){
             //Debug.Log("Space");
+            if(isCasting || isCooldown4)   return;
             Blink();
+            isCooldown4 = true;
         }else{
             return;
         }
@@ -208,15 +224,53 @@ public class PlayerController : MonoBehaviour
     }
     public void Shoot(){
         SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.shotSound);
-        Transform bullet = Instantiate(bulletPrefab);
+        //Transform bullet = Instantiate(bulletPrefab);
+        GameObject bullet = SimplePool.Spawn(bulletPrefab.gameObject,gunPosition.position,gunPosition.rotation);
         bullet.GetComponent<Projectile>().chosenChar = PlayerManager.Instance.chosenChar;
-        bullet.position = gunPosition.position;
-        bullet.rotation = gunPosition.rotation;
+        //bullet.position = gunPosition.position;
+        //bullet.rotation = gunPosition.rotation;
     }
 
     public void FinishCasting(){
         agent.speed = speed;
         isCasting = false;
+    }
+
+    public void HandleCooldown() {
+        if (isCooldown1)
+        {
+            cooldown1 -= Time.deltaTime;
+            if (cooldown1 < 0) {
+                cooldown1 = PlayerManager.Instance.cooldown1;
+                isCooldown1 = false;
+            }
+        }
+        if (isCooldown2) {
+            cooldown2 -= Time.deltaTime;
+            if (cooldown2 < 0)
+            {
+                cooldown2 = PlayerManager.Instance.cooldown2;
+                isCooldown2 = false;
+            }
+        }
+        if (isCooldown3)
+        {
+            cooldown3 -= Time.deltaTime;
+            if (cooldown3 < 0)
+            {
+                cooldown3 = PlayerManager.Instance.cooldown3;
+                isCooldown3 = false;
+            }
+        }
+        if (isCooldown4)
+        {
+            cooldown4 -= Time.deltaTime;
+            if (cooldown4 < 0)
+            {
+                cooldown4 = PlayerManager.Instance.cooldown4;
+                isCooldown4 = false;
+            }
+        }
     }
 
     public void Blink(){
@@ -275,6 +329,7 @@ public class PlayerController : MonoBehaviour
 
     public void CastSkill3()
     {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.ShieldSwingSound);
         particleHolder.transform.position = transform.position;
         particleHolder.eulerAngles = transform.eulerAngles;
         particlePrefabs[2].gameObject.SetActive(true);
@@ -340,6 +395,13 @@ public class PlayerController : MonoBehaviour
         agent.SetDestination(transform.position);
         isCasting = true;
         //isCastingSkill = true;
+    }
+    public void GetStat() {
+        cooldown1 = PlayerManager.Instance.cooldown1;
+        cooldown2 = PlayerManager.Instance.cooldown2;
+        cooldown3 = PlayerManager.Instance.cooldown3;
+        cooldown4 = PlayerManager.Instance.cooldown4;
+        speed = PlayerManager.Instance.speed;
     }
 
     public IEnumerator TurnOffParticle(GameObject particle) {

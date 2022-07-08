@@ -14,7 +14,7 @@ public class EnemyCharUI : MonoBehaviour
     private float panelDistance = 380f;
     private float leftMargin;
     private int charCount;
-    public Dictionary<int, TextMeshProUGUI> hiddenCharList = new Dictionary<int, TextMeshProUGUI>();
+    [SerializeField]public Dictionary<int, TextMeshProUGUI> hiddenCharList = new Dictionary<int, TextMeshProUGUI>();
 
     // Start is called before the first frame update
     void Start()

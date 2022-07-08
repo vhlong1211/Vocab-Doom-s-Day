@@ -28,6 +28,7 @@ public class CanvasHighscoreScreen : MonoBehaviour
 
     public void GetRankType(string type) {
         SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        rankTypeTxt.text = type;
         if (!DataManager.Instance.playerData.rankData.ContainsKey(type)) {
             ResetUI();
             return;

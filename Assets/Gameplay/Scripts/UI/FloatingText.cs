@@ -14,13 +14,6 @@ public class FloatingText : MonoBehaviour
 
     private IEnumerator ie_TurnOffText() {
         yield return new WaitForSeconds(existTime);
-        if (existTime > 2.5f)
-        {
-            GameObject.Destroy(gameObject);
-        }
-        else {
-            gameObject.SetActive(false);
-
-        }
+        gameObject.SetActive(false);
     }
 }

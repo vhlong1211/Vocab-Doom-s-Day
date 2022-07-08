@@ -6,6 +6,8 @@ public class CanvasPlayoptionScreen : MonoBehaviour
 {
     public CanvasHighscoreScreen canvasHighscoreScreen;
     public CanvasStartScreen canvasStartScreen;
+    public CanvasChooseMap canvasChooseMapScreen;
+    public CanvasInventoryScreen canvasInventoryScreen;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,6 @@ public class CanvasPlayoptionScreen : MonoBehaviour
         
     }
 
-    public CanvasChooseMap canvasChooseMapScreen;
     
     public void OnOpen()
     {
@@ -38,8 +39,15 @@ public class CanvasPlayoptionScreen : MonoBehaviour
     }
 
     public void OnHighscoreClick() {
-        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        //SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
         canvasHighscoreScreen.OnOpen();
+        gameObject.SetActive(false);
+    }
+
+    public void OnInventoryClick()
+    {
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        canvasInventoryScreen.OnOpen();
         gameObject.SetActive(false);
     }
 

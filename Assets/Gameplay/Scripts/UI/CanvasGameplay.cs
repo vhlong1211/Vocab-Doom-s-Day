@@ -26,7 +26,6 @@ public class CanvasGameplay : UICanvas
             m_Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        health = PlayerManager.Instance.health;
     }
 
     //UI canvas
@@ -47,29 +46,41 @@ public class CanvasGameplay : UICanvas
     //UI for ability
     [Header("Ability1")]
     public Image abilityImage1;
-    public float cooldown1 = 5f;
+    public float cooldown1;
     bool isCooldown1 = false;
     public KeyCode ability1;
 
     [Header("Ability2")]
     public Image abilityImage2;
-    public float cooldown2 = 5f;
+    public float cooldown2;
     bool isCooldown2 = false;
     public KeyCode ability2;
 
     [Header("Ability3")]
     public Image abilityImage3;
-    public float cooldown3 = 5f;
+    public float cooldown3;
     bool isCooldown3 = false;
     public KeyCode ability3;
 
     [Header("Ability4")]
     public Image abilityImage4;
-    public float cooldown4 = 5f;
+    public float cooldown4;
     bool isCooldown4 = false;
     public KeyCode ability4;
 
-    void Start() {
+    private void OnEnable()
+    {
+
+    }
+
+    public void Setup() {
+        health = PlayerManager.Instance.health;
+
+        cooldown1 = PlayerManager.Instance.cooldown1;
+        cooldown2 = PlayerManager.Instance.cooldown2;
+        cooldown3 = PlayerManager.Instance.cooldown3;
+        cooldown4 = PlayerManager.Instance.cooldown4;
+
         abilityImage1.fillAmount = 0;
         abilityImage2.fillAmount = 0;
         abilityImage3.fillAmount = 0;
@@ -78,6 +89,7 @@ public class CanvasGameplay : UICanvas
         playerHealthSlider2D.maxValue = health;
         playerHealthSlider3D.maxValue = health;
     }
+
 
     // Update is called once per frame
     void Update()

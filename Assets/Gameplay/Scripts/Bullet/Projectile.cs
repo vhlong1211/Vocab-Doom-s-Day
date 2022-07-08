@@ -21,13 +21,11 @@ public class Projectile : MonoBehaviour
     private float speed = 30f;
     public char chosenChar;
     public ProjectileMover particle;
-    public void Setup(){
-        //isSetup = true;
-    }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
+        speed = PlayerManager.Instance.bulletSpeed;
         StartCoroutine(DestroyBullet());
     }
 
@@ -45,13 +43,16 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag(TagUtility.TAG_ENEMY)) return;
         particle.HandleCollision(transform.position);
-        GameObject.Destroy(gameObject);
+        //GameObject.Destroy(gameObject);
+        SimplePool.Despawn(gameObject);
         StopAllCoroutines();
     }
 
     private IEnumerator DestroyBullet() { 
         yield return new WaitForSeconds(3);
-        GameObject.Destroy(gameObject);
+        //GameObject.Destroy(gameObject);
+        SimplePool.Despawn(gameObject);
     }
 }
