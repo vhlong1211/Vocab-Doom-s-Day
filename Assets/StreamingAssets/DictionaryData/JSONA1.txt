@@ -485,7 +485,6 @@ new=Mới
 news=Tin tức
 newspaper=Báo chí
 next=Tiếp theo
-next to=Kế bên
 nice=Tốt đẹp
 night=Đêm
 nine=Chín

@@ -89,6 +89,7 @@ public class EnemyStateManager : MonoBehaviour
 
     public void PrepareDie() {
         //Debug.Log("Prepare Die");
+        SoundManager.Instance.PlayMonsterGrowl();
         EnemyManager.Instance.enemyList.Remove(this);
         EnemyManager.Instance.deadEnemyCount++;
         SpawnerManager.Instance.enemyCount--;

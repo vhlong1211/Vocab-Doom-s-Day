@@ -28,6 +28,8 @@ public class CanvasStartScreen : MonoBehaviour
 
     public CanvasLoadingScreen canvasLoadingScreen;
     public CanvasPlayoptionScreen canvasPlayOptionScreen;
+    public Popup_Quit popup_Quit;
+    public Popup_Setting popup_Setting;
     public void OnStartClick()
     {
         //canvasLoadingScreen.OnOpen();
@@ -44,10 +46,12 @@ public class CanvasStartScreen : MonoBehaviour
 
     public void OnSettingClick() {
         SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        popup_Setting.OnOpen();
     }
 
     public void OnQuitClick() {
-        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound); 
+        SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        popup_Quit.OnOpen();
     }
 
     public void OnOpen() {

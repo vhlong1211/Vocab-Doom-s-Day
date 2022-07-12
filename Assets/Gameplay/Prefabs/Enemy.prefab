@@ -53,7 +53,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad3bbf24dc9faca45b3068c5b398228a, type: 3}
+  - {fileID: 2100000, guid: 163df287487fdaa4e91f0eb1643f6e88, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,7 +93,7 @@ TextMesh:
   m_FontSize: 0
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: ad3bbf24dc9faca45b3068c5b398228a, type: 3}
+  m_Font: {fileID: 12800000, guid: 163df287487fdaa4e91f0eb1643f6e88, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 6946235628054802453}
   - component: {fileID: 7638895914148333492}
   - component: {fileID: 7974358776788486769}
+  - component: {fileID: 8361808901257623643}
   m_Layer: 6
   m_Name: FloatTextEng
   m_TagString: Untagged
@@ -258,6 +259,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8361808901257623643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4935922722844466049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &5484243640227190589
 GameObject:
   m_ObjectHideFlags: 0

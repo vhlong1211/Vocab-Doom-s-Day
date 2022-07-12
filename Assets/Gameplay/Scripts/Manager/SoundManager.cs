@@ -41,10 +41,25 @@ public class SoundManager : MonoBehaviour
     public SoundInfor ShieldSwingSound;
     public SoundInfor openBookSound;
 
+    public SoundInfor monsterGrowl1;
+    public SoundInfor monsterGrowl2;
+    public SoundInfor monsterGrowl3;
+    public SoundInfor monsterGrowl4;
+    public SoundInfor monsterGrowl5;
+    public SoundInfor monsterGrowl6;
+
+
+    [HideInInspector]
+    public float soundVolume;
+    [HideInInspector]
+    public float musicVolume;
+
     void Awake()
     {
         BackgroundSound = gameObject.AddComponent<AudioSource>();
         SoundOne = gameObject.AddComponent<AudioSource>();
+        soundVolume = 1;
+        musicVolume = 1;
     }
 
     public void StopBgMusic(){
@@ -55,7 +70,7 @@ public class SoundManager : MonoBehaviour
     {
         if (infor.clip == null)  return;
         BackgroundSound.clip = infor.clip;
-        BackgroundSound.volume = infor.volume;
+        BackgroundSound.volume = infor.volume * musicVolume;
         BackgroundSound.loop = loop;
         BackgroundSound.Play();
     }
@@ -65,8 +80,35 @@ public class SoundManager : MonoBehaviour
         if (infor.clip == null)
             return;
         SoundOne.clip = infor.clip;
-        SoundOne.volume = infor.volume;
+        SoundOne.volume = infor.volume * soundVolume;
         SoundOne.PlayOneShot(infor.clip);
+    }
+
+    public void PlayMonsterGrowl() {
+        int rd = UnityEngine.Random.Range(1, 7);
+        if (rd == 1)
+        {
+            PlaySoundOneShot(monsterGrowl1);
+        }
+        else if (rd == 2) {
+            PlaySoundOneShot(monsterGrowl2);
+        }
+        else if (rd == 3)
+        {
+            PlaySoundOneShot(monsterGrowl3);
+        }
+        else if (rd == 4)
+        {
+            PlaySoundOneShot(monsterGrowl4);
+        }
+        else if (rd == 5)
+        {
+            PlaySoundOneShot(monsterGrowl5);
+        }
+        else if (rd == 6)
+        {
+            PlaySoundOneShot(monsterGrowl6);
+        }
     }
 
 
