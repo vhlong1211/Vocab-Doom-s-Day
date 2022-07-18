@@ -11,13 +11,6 @@ public class CanvasHighscoreScreen : MonoBehaviour
     public List<float> scoreList = new List<float>();
     public Text rankTypeTxt;
     public CanvasPlayoptionScreen playoptionScreen;
-    // Start is called before the first frame update
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void UpdateRank() {
         for (int i = 0; i < scoreList.Count; i++) {

@@ -80,7 +80,6 @@
     <Compile Include="Assets\Gameplay\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyPushBackState.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\FloatingText.cs" />
-    <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMessage.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyCharUI.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasProgressBar.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Buff\HealthBuff.cs" />
@@ -89,6 +88,7 @@
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasGoldBar.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasMainMenu.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Manager\LoadingManager.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\UI\Popup_Quit.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\BookItem.cs" />
     <Compile Include="Assets\Extension\Hovl Studio\White mage spells\Scripts\FrontAttack.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasStartScreen.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Assets\Extension\GothicUI\Scripts\DayDurationController.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Buff\SpeedBuff.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyChasingState.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\UI\Popup_Setting.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\CanvasWinScreen.cs" />
     <Compile Include="Assets\Gameplay\Effects\AAA Projectiles\Scripts\Rotator.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Camera\CameraScroll.cs" />
@@ -121,8 +122,6 @@
     <Compile Include="Assets\Gameplay\Scripts\Manager\SpawnerManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\Rank\RankItem.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyPatrollingState.cs" />
-    <Compile Include="Assets\Gameplay\Scripts\UI\Popup_Quit.cs" />
-    <Compile Include="Assets\Gameplay\Scripts\UI\Popup_Setting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />

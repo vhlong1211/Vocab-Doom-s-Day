@@ -23,18 +23,6 @@ public class LoadingManager : MonoBehaviour
 
     public Dictionary<string,string> dictionary = new Dictionary<string, string>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void LoadDictionary(int page){
         dictionary.Clear();
         string type = MathUtility.IndexToLevelType(page);

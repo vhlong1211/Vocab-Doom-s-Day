@@ -26,7 +26,7 @@ public class CanvasStartScreen : MonoBehaviour
         }
     }
 
-    public CanvasLoadingScreen canvasLoadingScreen;
+    //public CanvasLoadingScreen canvasLoadingScreen;
     public CanvasPlayoptionScreen canvasPlayOptionScreen;
     public Popup_Quit popup_Quit;
     public Popup_Setting popup_Setting;

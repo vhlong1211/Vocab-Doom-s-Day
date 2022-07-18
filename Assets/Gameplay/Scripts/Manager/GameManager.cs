@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
     public string currentLevel;
 
     public CanvasBookScreen bookScreen;
+
+    public Text fpsTest;
+    private float deltaTime;
     private void Start()
     {
         DataManager.Instance.LoadData();
@@ -52,6 +56,10 @@ public class GameManager : MonoBehaviour
             StopGameplay();
             stopGameplayTrigger = false;
         }
+
+        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        fpsTest.text = Mathf.Ceil(fps).ToString();
     }
 
 

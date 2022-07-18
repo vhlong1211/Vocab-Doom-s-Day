@@ -11,17 +11,6 @@ public class CanvasChooseMap : MonoBehaviour
     public Swiper swiper;
     public List<GameObject> lockerList = new List<GameObject>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnOpen()
     {

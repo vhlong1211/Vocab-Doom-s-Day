@@ -39,13 +39,13 @@ public class UIManager : MonoBehaviour
         Debug.Log(canvas.Length);
     }
 
-    private void LateUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+    //private void LateUpdate()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
 
-        }
-    }
+    //    }
+    //}
 
     public UICanvas OpenUI(UIName name)
     {

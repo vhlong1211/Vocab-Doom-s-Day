@@ -16,18 +16,6 @@ public class EnemyCharUI : MonoBehaviour
     private int charCount;
     [SerializeField]public Dictionary<int, TextMeshProUGUI> hiddenCharList = new Dictionary<int, TextMeshProUGUI>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void LateUpdate()
     {   
         charHolder.LookAt(Camera.main.transform);

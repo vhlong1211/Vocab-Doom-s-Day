@@ -7,22 +7,6 @@ public class CanvasInventoryScreen : MonoBehaviour
 {
     public Text goldTxt;
     public CanvasPlayoptionScreen canvasPlayoptionScreen;
-    //public List<GameObject> atkUpgradeColumn;
-    //public List<GameObject> healthUpgradeColumn;
-    //public List<GameObject> speedUpgradeColumn;
-    //public List<GameObject> cooldownUpgradeColumn;
-
-    //public Text atkCostTxt;
-    //public Text healthCostTxt;
-    //public Text speedCostTxt;
-    //public Text cooldownCostTxt;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

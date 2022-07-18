@@ -9,18 +9,6 @@ public class CanvasPlayoptionScreen : MonoBehaviour
     public CanvasChooseMap canvasChooseMapScreen;
     public CanvasInventoryScreen canvasInventoryScreen;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     
     public void OnOpen()
     {
