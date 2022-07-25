@@ -30,6 +30,7 @@ public class CanvasStartScreen : MonoBehaviour
     public CanvasPlayoptionScreen canvasPlayOptionScreen;
     public Popup_Quit popup_Quit;
     public Popup_Setting popup_Setting;
+    public CanvasTut tutScreen;
     public void OnStartClick()
     {
         //canvasLoadingScreen.OnOpen();
@@ -42,6 +43,8 @@ public class CanvasStartScreen : MonoBehaviour
 
     public void OnTutoClick() {
         SoundManager.Instance.PlaySoundOneShot(SoundManager.Instance.clickSound);
+        tutScreen.OnOpen();
+        gameObject.SetActive(false);
     }
 
     public void OnSettingClick() {

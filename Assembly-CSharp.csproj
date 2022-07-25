@@ -122,6 +122,7 @@
     <Compile Include="Assets\Gameplay\Scripts\Manager\SpawnerManager.cs" />
     <Compile Include="Assets\Gameplay\Scripts\UI\Rank\RankItem.cs" />
     <Compile Include="Assets\Gameplay\Scripts\Enemy\EnemyPatrollingState.cs" />
+    <Compile Include="Assets\Gameplay\Scripts\UI\CanvasTut.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Gameplay\Effects\AAA Projectiles\Prefabs\Projectiles(Speed)\Readme.txt" />
