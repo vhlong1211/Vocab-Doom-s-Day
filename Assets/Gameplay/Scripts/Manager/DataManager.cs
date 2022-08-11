@@ -36,6 +36,16 @@ public class DataManager : MonoBehaviour
         PlayerPrefs.SetString(DataTag.PLAYER_DATA, json2);
     }
 
+    public void ResetAllData() {
+        playerData.mapLevel = 0;
+        playerData.gold = 0;
+        playerData.upgradeAtkLevel = 0;
+        playerData.upgradeHealthLevel = 0;
+        playerData.upgradeSpeedLevel = 0;
+        playerData.upgradeCooldownLevel = 0;
+        playerData.rankData.Clear();
+        SaveData();
+    }
 }
 
 [System.Serializable]

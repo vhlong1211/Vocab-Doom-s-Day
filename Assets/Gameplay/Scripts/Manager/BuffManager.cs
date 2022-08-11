@@ -44,7 +44,7 @@ public class BuffManager : MonoBehaviour
             {
                 //Chose buff type
                 Transform currentPrefab;
-                if (Random.Range(0f, 1f) < 0.1f)
+                if (Random.Range(0f, 1f) < 0.5f)
                 {
                     currentPrefab = Instantiate(healthPotionPrefab);
                 }

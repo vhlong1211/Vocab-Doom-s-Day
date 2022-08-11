@@ -105,4 +105,10 @@ public class GameManager : MonoBehaviour
             DataManager.Instance.playerData.mapLevel = curLv + 1;
         }
     }
+
+    void OnApplicationQuit()
+    {
+        DataManager.Instance.SaveData();
+        //DataManager.Instance.ResetAllData();
+    }
 }
